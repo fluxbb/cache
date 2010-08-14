@@ -16,7 +16,7 @@ class Cache_Redis extends Cache
 	private $redis;
 
 	/**
-	* Initialise a new Memcache cache.
+	* Initialise a new Redis cache.
 	* 
 	* @param	host	The redis server host, defaults to localhost
 	* @param	port	The redis server port, defaults to 6379
