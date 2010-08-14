@@ -5,6 +5,9 @@
 * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
 */
 
+if (!defined('PHPCACHE_ROOT'))
+	define('PHPCACHE_ROOT', dirname(__FILE__).'/');
+
 interface Serializer
 {
 
@@ -29,7 +32,7 @@ class FilterUser
 
 	public function add_filter($type, $args = array())
 	{
-		@include_once 'filter/'.$type.'.php';
+		@include_once PHPCACHE_ROOT.'filter/'.$type.'.php';
 		if (!class_exists('Filter_'.$type))
 			throw new Exception('Unknown filter: '.$type);
 

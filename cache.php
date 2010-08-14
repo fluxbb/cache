@@ -5,7 +5,10 @@
 * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
 */
 
-require 'filter.php';
+if (!defined('PHPCACHE_ROOT'))
+	define('PHPCACHE_ROOT', dirname(__FILE__).'/');
+
+require PHPCACHE_ROOT.'filter.php';
 
 abstract class Cache extends FilterUser
 {
@@ -14,7 +17,7 @@ abstract class Cache extends FilterUser
 
 	public static function load($type, $args = array(), $serializer_type = false, $serializer_args = array())
 	{
-		@include_once 'cache/'.$type.'.php';
+		@include_once PHPCACHE_ROOT.'cache/'.$type.'.php';
 		if (!class_exists('Cache_'.$type))
 			throw new Exception('Unknown cache: '.$type);
 
