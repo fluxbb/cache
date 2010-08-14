@@ -13,14 +13,17 @@ abstract class Cache extends FilterUser
 
 	const DEFAULT_SERIALIZER = 'serialize';
 
-	public static function load($type, $args = array(), $serializer = false)
+	public static function load($type, $args = array(), $serializer_type = false, $serializer_args = array())
 	{
 		@include_once 'cache/'.$type.'.php';
 		if (!class_exists('Cache_'.$type))
 			throw new Exception('Unknown cache: '.$type);
 
-		if ($serializer === false)
-			$serializer = self::DEFAULT_SERIALIZER;
+		if ($serializer_type === false)
+		{
+			$serializer_type = self::DEFAULT_SERIALIZER;
+			$serializer_args = array();
+		}
 
 		// Instantiate the correct class and confirm it extends us
 		$cache = call_user_func(array(new ReflectionClass('Cache_'.$type), 'newInstance'), $args);
@@ -28,7 +31,9 @@ abstract class Cache extends FilterUser
 			throw new Exception('Does not conform to the cache interface: '.$type);
 
 		// Add a serialize filter by default as not all caches can handle storing PHP objects
-		$cache->add_filter($serializer);
+		$serializer = $cache->add_filter($serializer_type, $serializer_args);
+		if (!($serializer instanceof Serializer))
+			throw new Exception('Attempted to add serializer that does not implement the Serializer interface: '.$serializer_type);
 
 		return $cache;
 	}

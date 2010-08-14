@@ -9,7 +9,7 @@
  * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
  */
 
-class Filter_Serialize implements Filter
+class Filter_Serialize implements Filter, Serializer
 {
 
 	/**

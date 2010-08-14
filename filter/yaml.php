@@ -9,7 +9,7 @@
  * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
  */
 
-class Filter_YAML implements Filter
+class Filter_YAML implements Filter, Serializer
 {
 
 	/**

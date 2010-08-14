@@ -5,6 +5,11 @@
 * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
 */
 
+interface Serializer
+{
+
+}
+
 interface Filter
 {
 	public function encode($data);
@@ -35,6 +40,8 @@ class FilterUser
 
 		$this->num_filters++;
 		$this->filters[] = $filter;
+
+		return $filter;
 	}
 
 	protected function encode($data)
