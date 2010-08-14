@@ -14,6 +14,6 @@ class Filter_JSON implements Filter
 
 	public function decode($data)
 	{
-		return json_decode($data, true);
+		return json_decode($data);
 	}
 }
