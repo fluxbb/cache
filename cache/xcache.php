@@ -1,7 +1,19 @@
 <?php
 
+/**
+ * The XCache cache stores data using XCache.
+ * http://xcache.lighttpd.net
+ * 
+ * Copyright (C) 2010 Jamie Furness
+ * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ */
+
 class Cache_XCache extends Cache
 {
+
+	/**
+	* Initialise a new XCache cache.
+	*/
 	public function __construct($config)
 	{
 

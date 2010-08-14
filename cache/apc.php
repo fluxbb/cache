@@ -1,7 +1,19 @@
 <?php
 
+/**
+ * The APC cache stores data using APC.
+ * http://uk2.php.net/manual/en/book.apc.php
+ * 
+ * Copyright (C) 2010 Jamie Furness
+ * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ */
+
 class Cache_APC extends Cache
 {
+
+	/**
+	* Initialise a new APC cache.
+	*/
 	public function __construct($config)
 	{
 

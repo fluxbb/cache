@@ -1,7 +1,19 @@
 <?php
 
+/**
+ * The MMCache cache stores data using MMCache.
+ * http://turck-mmcache.sourceforge.net
+ * 
+ * Copyright (C) 2010 Jamie Furness
+ * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ */
+
 class Cache_MMCache extends Cache
 {
+
+	/**
+	* Initialise a new MMCache cache.
+	*/
 	public function __construct($config)
 	{
 

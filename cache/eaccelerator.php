@@ -1,7 +1,19 @@
 <?php
 
+/**
+ * The eAccelerator cache stores data using eAccelerator.
+ * http://eaccelerator.net
+ * 
+ * Copyright (C) 2010 Jamie Furness
+ * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ */
+
 class Cache_eAccelerator extends Cache
 {
+
+	/**
+	* Initialise a new eAccelerator cache.
+	*/
 	public function __construct($config)
 	{
 

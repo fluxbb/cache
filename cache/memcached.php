@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * The Memcached cache stores data using the Memcached extension for Memcached.
+ * http://uk2.php.net/manual/en/book.memcached.php
+ * 
+ * Copyright (C) 2010 Jamie Furness
+ * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ */
+
 class Cache_Memcached extends Cache
 {
 	const DEFAULT_HOST = 'localhost';
@@ -7,6 +15,12 @@ class Cache_Memcached extends Cache
 
 	private $memcached;
 
+	/**
+	* Initialise a new Memcached cache.
+	* 
+	* @param	host	The memcached server host, defaults to localhost
+	* @param	port	The memcached server port, defaults to 11211
+	*/
 	public function __construct($config)
 	{
 		$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;

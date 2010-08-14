@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * The MCrypt filter encrypts data using the given cipher and secret key.
+ * http://uk2.php.net/manual/en/book.mcrypt.php
+ * 
+ * Copyright (C) 2010 Jamie Furness
+ * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ */
+
 class Filter_MCrypt implements Filter
 {
 	private $key;
@@ -7,6 +15,13 @@ class Filter_MCrypt implements Filter
 	private $mode;
 	private $iv;
 
+	/**
+	* Initialise a new MCrypt filter.
+	* 
+	* @param	secret	The secret key to encrypt/decrypt data with
+	* @param	cipher	The cipher to use, defaults to MCRYPT_RIJNDAEL_128
+	* @param	mode	The block cipher mode to use, defaults to MCRYPT_MODE_ECB
+	*/
 	public function __construct($config)
 	{
 		$this->key = md5($config['secret']);

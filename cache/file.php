@@ -1,11 +1,24 @@
 <?php
 
+/**
+ * The File cache stores data using regular files.
+ * 
+ * Copyright (C) 2010 Jamie Furness
+ * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ */
+
 class Cache_File extends Cache
 {
 	const SUFFIX = '.cache';
 
 	private $dir;
 
+	/**
+	* Initialise a new File cache.
+	* 
+	* @param	dir	The directory in which to store cache files. Must be
+					writable by PHP and will be created if required.
+	*/
 	public function __construct($config)
 	{
 		$this->dir = $config['dir'];
