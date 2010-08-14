@@ -24,6 +24,9 @@ class Filter_MCrypt implements Filter
 	*/
 	public function __construct($config)
 	{
+		if (!extension_loaded('mcrypt'))
+			throw new Exception('The MCrypt filter requires the MCrypt extension.');
+
 		$this->key = md5($config['secret']);
 		$this->cipher = isset($config['cipher']) ? $config['cipher'] : MCRYPT_RIJNDAEL_128;
 		$this->mode = isset($config['mode']) ? $config['mode'] : MCRYPT_MODE_ECB;

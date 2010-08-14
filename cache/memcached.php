@@ -23,6 +23,9 @@ class Cache_Memcached extends Cache
 	*/
 	public function __construct($config)
 	{
+		if (!extension_loaded('memcached'))
+			throw new Exception('The Memcached cache requires the Memcached extension.');
+
 		$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;
 		$port = isset($config['port']) ? $config['port'] : self::DEFAULT_PORT;
 

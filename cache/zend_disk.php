@@ -17,7 +17,8 @@ class Cache_Zend_Disk extends Cache
 	*/
 	public function __construct($config)
 	{
-
+		if (!extension_loaded('zendcache'))
+			throw new Exception('The Zend Disk cache requires the ZendCache extension.');
 	}
 
 	private function key($key)

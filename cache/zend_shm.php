@@ -17,7 +17,8 @@ class Cache_Zend_SHM extends Cache
 	*/
 	public function __construct($config)
 	{
-
+		if (!extension_loaded('zendcache'))
+			throw new Exception('The Zend SHM cache requires the ZendCache extension.');
 	}
 
 	private function key($key)

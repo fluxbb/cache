@@ -16,7 +16,8 @@ class Cache_eAccelerator extends Cache
 	*/
 	public function __construct($config)
 	{
-
+		if (!extension_loaded('eaccelerator'))
+			throw new Exception('The eAccelerator cache requires the eAccelerator extension.');
 	}
 
 	protected function _set($key, $data)

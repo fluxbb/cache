@@ -23,6 +23,9 @@ class Cache_Redis extends Cache
 	*/
 	public function __construct($config)
 	{
+		if (!extension_loaded('redis'))
+			throw new Exception('The Redis cache requires the Redis extension.');
+
 		$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;
 		$port = isset($config['port']) ? $config['port'] : self::DEFAULT_PORT;
 

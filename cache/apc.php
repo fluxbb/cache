@@ -16,7 +16,8 @@ class Cache_APC extends Cache
 	*/
 	public function __construct($config)
 	{
-
+		if (!extension_loaded('apc'))
+			throw new Exception('The APC cache requires the APC extension.');
 	}
 
 	protected function _set($key, $data)

@@ -16,7 +16,8 @@ class Cache_XCache extends Cache
 	*/
 	public function __construct($config)
 	{
-
+		if (!extension_loaded('xcache'))
+			throw new Exception('The XCache cache requires the XCache extension.');
 	}
 
 	protected function _set($key, $data)

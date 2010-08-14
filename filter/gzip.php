@@ -19,6 +19,9 @@ class Filter_GZip implements Filter
 	*/
 	public function __construct($config)
 	{
+		if (!extension_loaded('zlib'))
+			throw new Exception('The GZip filter requires the Zlib extension.');
+
 		$this->level = $config['level'];
 	}
 

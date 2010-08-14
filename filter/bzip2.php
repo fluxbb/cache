@@ -20,6 +20,9 @@ class Filter_BZip2 implements Filter
 	*/
 	public function __construct($config)
 	{
+		if (!extension_loaded('bzip2'))
+			throw new Exception('The BZip2 filter requires the BZip2 extension.');
+
 		$this->level = $config['level'];
 	}
 
