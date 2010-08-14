@@ -2,7 +2,7 @@
 php-cache is an API abstraction around various different cache stores available for PHP. Filters are supported to allow encoding of data during storage.
 For cache stores that do not support data expiration (i.e. use of TTL) it is emulated.
 
-License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
+License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/lgpl.html)
 
 ## Supported cache stores
  * Flat files
