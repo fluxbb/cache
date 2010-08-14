@@ -4,7 +4,7 @@
  * The Memcache cache stores data using the Memcache extension for Memcached.
  * http://uk2.php.net/manual/en/book.memcache.php
  * 
- * Copyright (C) 2010 Jamie Furness
+ * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
  * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
  */
 

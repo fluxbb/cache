@@ -5,7 +5,7 @@
  * This filter is loaded by default as not all cache layers support
  * storing PHP objects.
  * 
- * Copyright (C) 2010 Jamie Furness
+ * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
  * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
  */
 

@@ -4,7 +4,7 @@
  * The MCrypt filter encrypts data using the given cipher and secret key.
  * http://uk2.php.net/manual/en/book.mcrypt.php
  * 
- * Copyright (C) 2010 Jamie Furness
+ * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
  * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
  */
 
