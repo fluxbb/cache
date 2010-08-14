@@ -10,19 +10,21 @@
 
 class Filter_GZip implements Filter
 {
+	const DEFAULT_LEVEL = 4;
+
 	private $level;
 
 	/**
 	* Initialise a new GZip filter.
 	* 
-	* @param	level	The compression level to use, ranging from 0-9
+	* @param	level	The compression level to use, ranging from 0-9. Defaults to 4
 	*/
 	public function __construct($config)
 	{
 		if (!extension_loaded('zlib'))
 			throw new Exception('The GZip filter requires the Zlib extension.');
 
-		$this->level = $config['level'];
+		$this->level = isset($config['level']) ? $config['level'] : self::DEFAULT_LEVEL;
 	}
 
 	public function encode($data)

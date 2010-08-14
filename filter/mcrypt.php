@@ -10,6 +10,9 @@
 
 class Filter_MCrypt implements Filter
 {
+	const DEFAULT_CIPHER = MCRYPT_RIJNDAEL_128;
+	const DEFAULT_MODE = MCRYPT_MODE_ECB;
+
 	private $key;
 	private $cipher;
 	private $mode;
@@ -27,9 +30,12 @@ class Filter_MCrypt implements Filter
 		if (!extension_loaded('mcrypt'))
 			throw new Exception('The MCrypt filter requires the MCrypt extension.');
 
+		if (!isset($config['secret']))
+			throw new Exception('A secret is required to encrypt data.');
+
 		$this->key = md5($config['secret']);
-		$this->cipher = isset($config['cipher']) ? $config['cipher'] : MCRYPT_RIJNDAEL_128;
-		$this->mode = isset($config['mode']) ? $config['mode'] : MCRYPT_MODE_ECB;
+		$this->cipher = isset($config['cipher']) ? $config['cipher'] : self::DEFAULT_CIPHER;
+		$this->mode = isset($config['mode']) ? $config['mode'] : self::DEFAULT_MODE;
 
 		$this->iv = mcrypt_create_iv(mcrypt_get_iv_size($this->cipher, $this->mode), MCRYPT_RAND);
 	}

@@ -11,19 +11,21 @@
 
 class Filter_BZip2 implements Filter
 {
+	const DEFAULT_LEVEL = 4;
+
 	private $level;
 
 	/**
 	* Initialise a new BZip2 filter.
 	* 
-	* @param	level	The compression level to use, ranging from 0-9
+	* @param	level	The compression level to use, ranging from 0-9. Defaults to 4
 	*/
 	public function __construct($config)
 	{
 		if (!extension_loaded('bzip2'))
 			throw new Exception('The BZip2 filter requires the BZip2 extension.');
 
-		$this->level = $config['level'];
+		$this->level = isset($config['level']) ? $config['level'] : self::DEFAULT_LEVEL;
 	}
 
 	public function encode($data)
