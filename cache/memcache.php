@@ -46,6 +46,12 @@ class Cache_Memcache extends Cache
 
 	protected function _set($key, $data, $ttl)
 	{
+		// Memcache can take TTL as an expire time or number of seconds. If bigger than 30 days
+		// Memcache assumes it to be an expire time. Since we always expect TTL in number of seconds
+		// convert it correctly if needed to stop Memcache wrongly assuming its an expire time.
+		if ($ttl > 2592000)
+			$ttl = time() + $ttl;
+
 		if ($this->memcache->set($key, $data, 0, $ttl) === false)
 			throw new Exception('Unable to write memcache cache: '.$key);
 	}
