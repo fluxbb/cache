@@ -10,8 +10,6 @@
 
 class Cache_Zend_Disk extends Cache
 {
-	const EMULATE_TTL = false;
-
 	const NAMESPACE = 'php-cache';
 
 	/**

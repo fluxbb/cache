@@ -10,8 +10,6 @@
 
 class Cache_XCache extends Cache
 {
-	const EMULATE_TTL = false;
-
 	/**
 	* Initialise a new XCache cache.
 	*/
@@ -43,6 +41,8 @@ class Cache_XCache extends Cache
 
 	public function clear()
 	{
+		// Note: xcache_clear_cache() is an admin function! If you have
+		// xcache.admin.enable_auth = On in php.ini this will require HTTP auth!
 		xcache_clear_cache(XC_TYPE_VAR, 0);
 	}
 }

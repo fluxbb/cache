@@ -10,8 +10,6 @@
 
 class Cache_WinCache extends Cache
 {
-	const EMULATE_TTL = false;
-
 	/**
 	* Initialise a new WinCache cache.
 	*/

@@ -10,8 +10,6 @@
 
 class Cache_Memcache extends Cache
 {
-	const EMULATE_TTL = false;
-
 	const DEFAULT_HOST = 'localhost';
 	const DEFAULT_PORT = 11211;
 

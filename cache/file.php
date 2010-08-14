@@ -9,8 +9,6 @@
 
 class Cache_File extends Cache
 {
-	const EMULATE_TTL = true;
-
 	const SUFFIX = '.cache';
 
 	private $dir;
@@ -33,10 +31,39 @@ class Cache_File extends Cache
 		return sha1($key);
 	}
 
+	// Since we are emulating the TTL we need to override set()
+	public function set($key, $data, $ttl = 0)
+	{
+		// Since files don't support TTL we need to emulate it
+		$data = array('expire' => $ttl > 0 ? time() + $ttl : 0, 'data' => $data);
+
+		parent::set($key, $data, $ttl);
+	}
+
 	protected function _set($key, $data, $ttl)
 	{
 		if (@file_put_contents($this->dir.$this->key($key).self::SUFFIX, $data) === false)
 			throw new Exception('Unable to write file cache: '.$key);
+	}
+
+	// Since we are emulating the TTL we need to override get()
+	public function get($key)
+	{
+		$data = parent::get($key);
+
+		// Check if the data has expired
+		if ($data['expire'] > 0 && $data['expire'] < time())
+		{
+			$this->delete($key);
+
+			// Correct the hit/miss counts
+			$this->hits--;
+			$this->misses++;
+
+			return self::NOT_FOUND;
+		}
+
+		return $data['data'];
 	}
 
 	protected function _get($key)

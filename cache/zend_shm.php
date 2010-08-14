@@ -10,8 +10,6 @@
 
 class Cache_Zend_SHM extends Cache
 {
-	const EMULATE_TTL = false;
-
 	const NAMESPACE = 'php-cache';
 
 	/**
