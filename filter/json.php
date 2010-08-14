@@ -6,7 +6,7 @@
  * support storing PHP objects.
  * 
  * Copyright (C) 2010 Frank Smit (http://61924.nl)
- * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
 class Filter_JSON implements Filter, Serializer

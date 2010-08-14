@@ -5,7 +5,7 @@
  * http://uk2.php.net/manual/en/book.memcache.php
  * 
  * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
- * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
 class Cache_Memcache extends Cache

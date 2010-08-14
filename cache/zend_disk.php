@@ -5,7 +5,7 @@
  * http://files.zend.com/help/Zend-Platform/zend_cache_api.htm
  * 
  * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
- * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
 class Cache_Zend_Disk extends Cache

@@ -5,7 +5,7 @@
  * http://github.com/owlient/phpredis
  * 
  * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
- * License: http://www.gnu.org/licenses/gpl.html GPL version 3 or higher
+ * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
 class Cache_Redis extends Cache
