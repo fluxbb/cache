@@ -34,3 +34,8 @@ $cache->set('test', $uniqid);
 // Check that the new value was stored correctly
 $value = $cache->get('test');
 echo ($value === Cache::NOT_FOUND ? 'Value not found in cache.' : 'Value: '.$value)."\n";
+
+echo '--------------------------------'."\n";
+echo 'Cache Hits: '.$cache->hits."\n";
+echo 'Cache Misses: '.$cache->misses."\n";
+echo '--------------------------------'."\n";

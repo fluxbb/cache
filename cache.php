@@ -33,10 +33,8 @@ abstract class Cache extends FilterUser
 		return $cache;
 	}
 
-	public function __construct($config)
-	{
-	
-	}
+	public $hits = 0;
+	public $misses = 0;
 
 	public function set($key, $data)
 	{
@@ -50,10 +48,14 @@ abstract class Cache extends FilterUser
 	{
 		$data = $this->_get($key);
 		if ($data === self::NOT_FOUND)
+		{
+			$this->misses++;
 			return self::NOT_FOUND;
+		}
 
 		$data = $this->decode($data);
 
+		$this->hits++;
 		return $data;
 	}
 
