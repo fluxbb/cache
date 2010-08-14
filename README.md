@@ -19,6 +19,7 @@ License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/
  * [PHP-serialize](http://uk2.php.net/manual/en/function.serialize.php)
  * [JSON](http://uk2.php.net/manual/en/book.json.php)
  * [YAML](http://uk2.php.net/manual/en/book.yaml.php)
+ * [Spyc](http://code.google.com/p/spyc/) (YAML)
 
 ## Available filters
 ### Compression
@@ -30,7 +31,13 @@ License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/
  * [MCrypt](http://uk2.php.net/manual/en/book.mcrypt.php)
 
 ## API
+	Cache::load($type, $args = array(), $serializer_type = false, $serializer_args = array());
+
 	$cache->set($key, $data, $ttl = 0);
 	$cache->get($key);
 	$cache->delete($key);
 	$cache->clear();
+
+	$cache->inserts;
+	$cache->hits;
+	$cache->misses;
