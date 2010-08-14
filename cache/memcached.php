@@ -18,7 +18,7 @@ class Cache_Memcached extends Cache
 	/**
 	* Initialise a new Memcached cache.
 	* 
-	* @param	instance	An existing Memcache instance to reuse (if
+	* @param	instance	An existing Memcached instance to reuse (if
 							specified the other params are ignored)
 	* @param	host		The memcached server host, defaults to localhost
 	* @param	port		The memcached server port, defaults to 11211
