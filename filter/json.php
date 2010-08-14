@@ -4,6 +4,7 @@
  * The JSON filter serializes data into json string form.
  * This filter can be loaded by default as not all cache layers
  * support storing PHP objects.
+ * http://uk2.php.net/manual/en/book.json.php
  * 
  * Copyright (C) 2010 Frank Smit (http://61924.nl)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)

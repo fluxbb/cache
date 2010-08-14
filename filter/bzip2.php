@@ -22,8 +22,8 @@ class Filter_BZip2 implements Filter
 	*/
 	public function __construct($config)
 	{
-		if (!extension_loaded('bzip2'))
-			throw new Exception('The BZip2 filter requires the BZip2 extension.');
+		if (!extension_loaded('bz2'))
+			throw new Exception('The BZip2 filter requires the bz2 extension.');
 
 		$this->level = isset($config['level']) ? $config['level'] : self::DEFAULT_LEVEL;
 	}
