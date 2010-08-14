@@ -1,20 +1,24 @@
 <?php
 
-require 'codec.php';
+require 'filter.php';
 
-abstract class Cache extends CodecUser
+abstract class Cache extends FilterUser
 {
 	const NOT_FOUND = 'Cache::NOT_FOUND';
 
 	public static function load($type, $args = array())
 	{
-		if (!file_exists('cache/'.$type.'.php'))
-			throw new Exception('No such cache layer: '.$type);
+		@include_once 'cache/'.$type.'.php';
+		if (!class_exists('Cache_'.$type))
+			throw new Exception('Unknown cache: '.$type);
 
-		require_once 'cache/'.$type.'.php';
-
+		// Instantiate the correct class and confirm it extends us
 		$cache = call_user_func(array(new ReflectionClass('Cache_'.$type), 'newInstance'), $args);
-		$cache->add_codec('serialize');
+		if (!is_subclass_of($cache, 'Cache'))
+			throw new Exception('Does not conform to the cache interface: '.$type);
+
+		// Add the serialize filter by default as not all caches can handle storing PHP objects
+		$cache->add_filter('serialize');
 
 		return $cache;
 	}

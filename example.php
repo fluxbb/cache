@@ -12,8 +12,8 @@ try
 	// If we have the mcrypt extension lets encrypt the cache
 	if (extension_loaded('mcrypt'))
 	{
-		echo 'Adding mcrypt codec.'."\n";
-		$cache->add_codec('mcrypt', array('secret' => 'i like ponies'));
+		echo 'Adding mcrypt filter.'."\n";
+		$cache->add_filter('mcrypt', array('secret' => 'i like ponies'));
 	}
 }
 catch (Exception $e)

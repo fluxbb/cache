@@ -1,6 +1,6 @@
 <?php
 
-class Codec_Serialize implements Codec
+class Filter_Serialize implements Filter
 {
 	public function __construct($config)
 	{

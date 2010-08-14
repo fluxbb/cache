@@ -1,6 +1,6 @@
 <?php
 
-class Codec_GZip
+class Filter_GZip implements Filter
 {
 	private $level;
 

@@ -1,6 +1,6 @@
 <?php
 
-class Codec_MCrypt
+class Filter_MCrypt implements Filter
 {
 	private $key;
 	private $cipher;
