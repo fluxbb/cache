@@ -19,13 +19,16 @@ For cache stores that do not support data expiration (i.e. use of TTL) it is emu
  * [YAML](http://uk2.php.net/manual/en/book.yaml.php)
 
 ## Available filters
+### Compression
  * [BZip2](http://uk2.php.net/manual/en/book.bzip2.php)
  * [GZip](http://uk2.php.net/manual/en/book.zlib.php)
  * [LZF](http://uk2.php.net/manual/en/book.lzf.php)
+
+### Encryption
  * [MCrypt](http://uk2.php.net/manual/en/book.mcrypt.php)
 
 ## API
-	set($key, $data, $ttl = 0);
-	get($key);
-	delete($key);
-	clear();
+	$cache->set($key, $data, $ttl = 0);
+	$cache->get($key);
+	$cache->delete($key);
+	$cache->clear();
