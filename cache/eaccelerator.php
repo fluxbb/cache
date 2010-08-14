@@ -10,6 +10,7 @@
 
 class Cache_eAccelerator extends Cache
 {
+	const EMULATE_TTL = false;
 
 	/**
 	* Initialise a new eAccelerator cache.
@@ -20,9 +21,9 @@ class Cache_eAccelerator extends Cache
 			throw new Exception('The eAccelerator cache requires the eAccelerator extension.');
 	}
 
-	protected function _set($key, $data)
+	protected function _set($key, $data, $ttl)
 	{
-		if (eaccelerator_put($key, $data) === false)
+		if (eaccelerator_put($key, $data, $ttl) === false)
 			throw new Exception('Unable to write eAccelerator cache: '.$key);
 	}
 

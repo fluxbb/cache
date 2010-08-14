@@ -10,6 +10,8 @@
 
 class Cache_Memcached extends Cache
 {
+	const EMULATE_TTL = false;
+
 	const DEFAULT_HOST = 'localhost';
 	const DEFAULT_PORT = 11211;
 
@@ -42,9 +44,9 @@ class Cache_Memcached extends Cache
 		}
 	}
 
-	protected function _set($key, $data)
+	protected function _set($key, $data, $ttl)
 	{
-		if ($this->memcached->set($key, $data) === false)
+		if ($this->memcached->set($key, $data, $ttl) === false)
 			throw new Exception('Unable to write memcached cache: '.$key);
 	}
 

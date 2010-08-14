@@ -9,6 +9,8 @@
 
 class Cache_File extends Cache
 {
+	const EMULATE_TTL = true;
+
 	const SUFFIX = '.cache';
 
 	private $dir;
@@ -31,7 +33,7 @@ class Cache_File extends Cache
 		return sha1($key);
 	}
 
-	protected function _set($key, $data)
+	protected function _set($key, $data, $ttl)
 	{
 		if (@file_put_contents($this->dir.$this->key($key).self::SUFFIX, $data) === false)
 			throw new Exception('Unable to write file cache: '.$key);

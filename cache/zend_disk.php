@@ -10,6 +10,8 @@
 
 class Cache_Zend_Disk extends Cache
 {
+	const EMULATE_TTL = false;
+
 	const NAMESPACE = 'php-cache';
 
 	/**
@@ -26,9 +28,9 @@ class Cache_Zend_Disk extends Cache
 		return self::NAMESPACE.'::'.$key;
 	}
 
-	protected function _set($key, $data)
+	protected function _set($key, $data, $ttl)
 	{
-		if (zend_disk_cache_store($this->key($key), $data) === false)
+		if (zend_disk_cache_store($this->key($key), $data, $ttl) === false)
 			throw new Exception('Unable to write Zend Disk cache: '.$key);
 	}
 

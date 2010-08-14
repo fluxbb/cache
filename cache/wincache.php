@@ -10,6 +10,7 @@
 
 class Cache_WinCache extends Cache
 {
+	const EMULATE_TTL = false;
 
 	/**
 	* Initialise a new WinCache cache.
@@ -20,9 +21,9 @@ class Cache_WinCache extends Cache
 			throw new Exception('The WinCache cache requires the WinCache extension.');
 	}
 
-	protected function _set($key, $data)
+	protected function _set($key, $data, $ttl)
 	{
-		if (wincache_ucache_set($key, $data) === false)
+		if (wincache_ucache_set($key, $data, $ttl) === false)
 			throw new Exception('Unable to write wincache cache: '.$key);
 	}
 

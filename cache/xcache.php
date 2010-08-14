@@ -10,6 +10,7 @@
 
 class Cache_XCache extends Cache
 {
+	const EMULATE_TTL = false;
 
 	/**
 	* Initialise a new XCache cache.
@@ -20,9 +21,9 @@ class Cache_XCache extends Cache
 			throw new Exception('The XCache cache requires the XCache extension.');
 	}
 
-	protected function _set($key, $data)
+	protected function _set($key, $data, $ttl)
 	{
-		if (xcache_set($key, $data) === false)
+		if (xcache_set($key, $data, $ttl) === false)
 			throw new Exception('Unable to write xcache cache: '.$key);
 	}
 

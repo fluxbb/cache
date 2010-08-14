@@ -10,6 +10,7 @@
 
 class Cache_APC extends Cache
 {
+	const EMULATE_TTL = false;
 
 	/**
 	* Initialise a new APC cache.
@@ -20,9 +21,9 @@ class Cache_APC extends Cache
 			throw new Exception('The APC cache requires the APC extension.');
 	}
 
-	protected function _set($key, $data)
+	protected function _set($key, $data, $ttl)
 	{
-		if (apc_store($key, $data) === false)
+		if (apc_store($key, $data, $ttl) === false)
 			throw new Exception('Unable to write APC cache: '.$key);
 	}
 

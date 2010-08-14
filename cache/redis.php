@@ -10,6 +10,8 @@
 
 class Cache_Redis extends Cache
 {
+	const EMULATE_TTL = true;
+
 	const DEFAULT_HOST = 'localhost';
 	const DEFAULT_PORT = 6379;
 
@@ -42,7 +44,7 @@ class Cache_Redis extends Cache
 		}
 	}
 
-	protected function _set($key, $data)
+	protected function _set($key, $data, $ttl)
 	{
 		if ($this->redis->set($key, $data) === false)
 			throw new Exception('Unable to write redis cache: '.$key);

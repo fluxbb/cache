@@ -10,7 +10,7 @@ require 'filter.php';
 abstract class Cache extends FilterUser
 {
 	const NOT_FOUND = 'Cache::NOT_FOUND';
-
+	const EMULATE_TTL = true;
 	const DEFAULT_SERIALIZER = 'serialize';
 
 	public static function load($type, $args = array(), $serializer_type = false, $serializer_args = array())
@@ -41,13 +41,17 @@ abstract class Cache extends FilterUser
 	public $hits = 0;
 	public $misses = 0;
 
-	public function set($key, $data)
+	public function set($key, $data, $ttl = 0)
 	{
+		// If this wrapper doesn't support TTL we need to emulate it
+		if ($this::EMULATE_TTL === true)
+			$data = array('expire' => $ttl > 0 ? time() + $ttl : 0, 'data' => $data);
+
 		$data = $this->encode($data);
-		$this->_set($key, $data);
+		$this->_set($key, $data, $ttl);
 	}
 
-	protected abstract function _set($key, $data);
+	protected abstract function _set($key, $data, $ttl);
 
 	public function get($key)
 	{
@@ -59,6 +63,20 @@ abstract class Cache extends FilterUser
 		}
 
 		$data = $this->decode($data);
+
+		// If this wrapper doesn't support TTL we need to emulate it
+		if ($this::EMULATE_TTL === true)
+		{
+			// If the data has expired
+			if ($data['expire'] !== 0 && $data['expire'] < time())
+			{
+				$this->delete($key);
+				$this->misses++;
+				return self::NOT_FOUND;
+			}
+
+			$data = $data['data'];
+		}
 
 		$this->hits++;
 		return $data;
