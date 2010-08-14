@@ -18,19 +18,28 @@ class Cache_Memcache extends Cache
 	/**
 	* Initialise a new Memcache cache.
 	* 
-	* @param	host	The memcached server host, defaults to localhost
-	* @param	port	The memcached server port, defaults to 11211
+	* @param	instance	An existing Memcache instance to reuse (if
+							specified the other params are ignored)
+	* @param	host		The memcached server host, defaults to localhost
+	* @param	port		The memcached server port, defaults to 11211
 	*/
 	public function __construct($config)
 	{
 		if (!extension_loaded('memcache'))
 			throw new Exception('The Memcache cache requires the Memcache extension.');
 
-		$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;
-		$port = isset($config['port']) ? $config['port'] : self::DEFAULT_PORT;
+		// If we were given a Memcache instance use that
+		if (isset($config['instance']))
+			$this->memcache = $config['instance'];
+		else
+		{
+			$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;
+			$port = isset($config['port']) ? $config['port'] : self::DEFAULT_PORT;
 
-		$this->memcache = new Memcache();
-		$this->memcache->connect($host, $port);
+			$this->memcache = new Memcache();
+			if (@$this->memcache->connect($host, $port) === false)
+				throw new Exception('Unable to connect to memcached server: '.$host.':'.$port);
+		}
 	}
 
 	protected function _set($key, $data)

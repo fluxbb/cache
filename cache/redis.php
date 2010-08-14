@@ -18,19 +18,28 @@ class Cache_Redis extends Cache
 	/**
 	* Initialise a new Redis cache.
 	* 
-	* @param	host	The redis server host, defaults to localhost
-	* @param	port	The redis server port, defaults to 6379
+	* @param	instance	An existing Redis instance to reuse (if
+							specified the other params are ignored)
+	* @param	host		The redis server host, defaults to localhost
+	* @param	port		The redis server port, defaults to 6379
 	*/
 	public function __construct($config)
 	{
 		if (!extension_loaded('redis'))
 			throw new Exception('The Redis cache requires the Redis extension.');
 
-		$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;
-		$port = isset($config['port']) ? $config['port'] : self::DEFAULT_PORT;
+		// If we were given a Redis instance use that
+		if (isset($config['instance']))
+			$this->redis = $config['instance'];
+		else
+		{
+			$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;
+			$port = isset($config['port']) ? $config['port'] : self::DEFAULT_PORT;
 
-		$this->redis = new Redis();
-		$this->redis->connect($host, $port);
+			$this->redis = new Redis();
+			if (@$this->redis->connect($host, $port) === false)
+				throw new Exception('Unable to connect to redis server: '.$host.':'.$port);
+		}
 	}
 
 	protected function _set($key, $data)
