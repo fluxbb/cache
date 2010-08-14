@@ -68,7 +68,7 @@ abstract class Cache extends FilterUser
 		if ($this::EMULATE_TTL === true)
 		{
 			// If the data has expired
-			if ($data['expire'] !== 0 && $data['expire'] < time())
+			if ($data['expire'] > 0 && $data['expire'] < time())
 			{
 				$this->delete($key);
 				$this->misses++;
