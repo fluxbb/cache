@@ -50,4 +50,11 @@ class Cache_File extends Cache
 	{
 		@unlink($this->dir.$this->key($key).self::SUFFIX);
 	}
+
+	public function clear()
+	{
+		$files = glob($this->dir.'*'.self::SUFFIX);
+		foreach ($files as $file)
+			@unlink($file);
+	}
 }

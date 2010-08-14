@@ -62,4 +62,5 @@ abstract class Cache extends FilterUser
 	protected abstract function _get($key);
 
 	public abstract function delete($key);
+	public abstract function clear();
 }

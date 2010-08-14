@@ -38,4 +38,9 @@ class Cache_APC extends Cache
 	{
 		apc_delete($key);
 	}
+
+	public function clear()
+	{
+		apc_clear_cache('user');
+	}
 }

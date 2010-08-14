@@ -49,4 +49,9 @@ class Cache_Memcache extends Cache
 	{
 		$this->memcache->delete($key);
 	}
+
+	public function clear()
+	{
+		$this->memcache->flush();
+	}
 }

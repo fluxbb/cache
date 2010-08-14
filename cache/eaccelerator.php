@@ -38,4 +38,9 @@ class Cache_eAccelerator extends Cache
 	{
 		eaccelerator_rm($key);
 	}
+
+	public function clear()
+	{
+		eaccelerator_clear();
+	}
 }

@@ -38,4 +38,9 @@ class Cache_XCache extends Cache
 	{
 		xcache_unset($key);
 	}
+
+	public function clear()
+	{
+		xcache_clear_cache(XC_TYPE_VAR, 0);
+	}
 }
