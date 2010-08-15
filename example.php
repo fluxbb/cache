@@ -2,7 +2,8 @@
 
 header('Content-type: text/plain');
 
-require 'cache.php';
+define('PHPCACHE_ROOT', dirname(__FILE__).'/cache/');
+require PHPCACHE_ROOT.'cache.php';
 
 try
 {
