@@ -23,11 +23,21 @@ class Filter_Spyc implements Filter, Serializer
 
 	public function encode($data)
 	{
+		if (is_object($data))
+			throw new Exception('Spyc cannot handle serializing objects!');
+
+		if (is_array($data))
+			$data = array($data);
+
 		return Spyc::YAMLDump($data);
 	}
 
 	public function decode($data)
 	{
-		return Spyc::YAMLLoad($data);
+		$data = Spyc::YAMLLoad($data);
+		if (empty($data))
+			return null;
+
+		return $data[0];
 	}
 }
