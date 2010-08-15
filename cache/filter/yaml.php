@@ -4,6 +4,7 @@
  * The YAML filter serializes data into YAML string form.
  * This filter can be loaded by default as not all cache layers
  * support storing PHP objects.
+ * http://uk2.php.net/manual/en/book.yaml.php
  * 
  * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)

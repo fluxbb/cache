@@ -1,9 +1,10 @@
 <?php
 
 /**
- * The YAML filter serializes data into YAML string form.
+ * The XML filter serializes data into XML string form.
  * This filter can be loaded by default as not all cache layers
  * support storing PHP objects.
+ * http://pear.php.net/package/XML_Serializer/
  * 
  * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
