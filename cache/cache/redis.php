@@ -22,6 +22,7 @@ class Cache_Redis extends Cache
 							specified the other params are ignored)
 	* @param	host		The redis server host, defaults to localhost
 	* @param	port		The redis server port, defaults to 6379
+	* @param	password	The redis server password, if required
 	*/
 	public function __construct($config)
 	{
@@ -39,6 +40,9 @@ class Cache_Redis extends Cache
 			$this->redis = new Redis();
 			if (@$this->redis->connect($host, $port) === false)
 				throw new Exception('Unable to connect to redis server: '.$host.':'.$port);
+
+			if (isset($config['password']))
+				$this->redis->auth($config['password']);
 		}
 	}
 
