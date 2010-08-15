@@ -19,7 +19,6 @@ License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/
  * [PHP-serialize](http://uk2.php.net/manual/en/function.serialize.php)
  * [JSON](http://uk2.php.net/manual/en/book.json.php) * does not correctly serialize associative arrays or objects with protected/private attributes
  * [YAML](http://uk2.php.net/manual/en/book.yaml.php)
- * [Spyc](http://code.google.com/p/spyc/) (YAML) * does not correctly serialize objects
 
 ## Available filters
 ### Compression
