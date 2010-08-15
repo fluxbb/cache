@@ -16,7 +16,7 @@ class Filter_XML implements Filter, Serializer
 	private $unserializer;
 
 	/**
-	* Initialise a new YAML filter.
+	* Initialise a new XML filter.
 	*/
 	public function __construct($config)
 	{
