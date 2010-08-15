@@ -16,7 +16,7 @@ class Cache_eAccelerator extends Cache
 	public function __construct($config)
 	{
 		if (!extension_loaded('eaccelerator') || !function_exists('eaccelerator_put')) // Some reason the user cache functions aren't available in 0.9.6.x...
-			throw new Exception('The eAccelerator cache requires the eAccelerator extension.');
+			throw new Exception('The eAccelerator cache requires the eAccelerator extension with shared memory functions enabled.');
 	}
 
 	protected function _set($key, $data, $ttl)
