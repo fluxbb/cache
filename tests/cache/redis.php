@@ -7,6 +7,6 @@ class RedisTest extends CacheTest
 {
 	public function __construct()
 	{
-		parent::__construct('redis');
+		parent::__construct('redis', array('host' => 'localhost', 'port' => 6379));
 	}
 }
