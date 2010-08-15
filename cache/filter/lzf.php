@@ -17,7 +17,7 @@ class Filter_LZF implements Filter
 	*/
 	public function __construct($config)
 	{
-		if (!extension_loaded('zlf'))
+		if (!extension_loaded('lzf'))
 			throw new Exception('The ZLF filter requires the ZLF extension.');
 	}
 
