@@ -1,7 +1,7 @@
 <?php
 
 define('PHPCACHE_ROOT', dirname(__FILE__).'/../../cache/');
-require PHPCACHE_ROOT.'../tests/serializers.php';
+require PHPCACHE_ROOT.'../tests/serializer.php';
 
 class SpycTest extends SerializersTest
 {

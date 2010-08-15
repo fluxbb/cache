@@ -1,7 +1,7 @@
 <?php
 
 define('PHPCACHE_ROOT', dirname(__FILE__).'/../../cache/');
-require PHPCACHE_ROOT.'../tests/filters.php';
+require PHPCACHE_ROOT.'../tests/filter.php';
 
 class BZip2Test extends FilterTest
 {

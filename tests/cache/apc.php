@@ -1,12 +1,12 @@
 <?php
 
 define('PHPCACHE_ROOT', dirname(__FILE__).'/../../cache/');
-require PHPCACHE_ROOT.'../tests/filters.php';
+require PHPCACHE_ROOT.'../tests/cache.php';
 
-class LZFTest extends FilterTest
+class APCTest extends CacheTest
 {
 	public function __construct()
 	{
-		parent::__construct('lzf');
+		parent::__construct('apc');
 	}
 }
