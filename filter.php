@@ -47,7 +47,7 @@ class FilterUser
 		return $filter;
 	}
 
-	protected function encode($data)
+	public function encode($data)
 	{
 		for ($i = 0;$i < $this->num_filters;$i++)
 			$data = $this->filters[$i]->encode($data);
@@ -55,7 +55,7 @@ class FilterUser
 		return $data;
 	}
 
-	protected function decode($data)
+	public function decode($data)
 	{
 		for ($i = $this->num_filters - 1;$i >= 0;$i--)
 			$data = $this->filters[$i]->decode($data);

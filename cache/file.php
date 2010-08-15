@@ -50,6 +50,8 @@ class Cache_File extends Cache
 	public function get($key)
 	{
 		$data = parent::get($key);
+		if ($data === self::NOT_FOUND)
+			return self::NOT_FOUND;
 
 		// Check if the data has expired
 		if ($data['expire'] > 0 && $data['expire'] < time())
