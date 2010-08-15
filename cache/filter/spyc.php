@@ -18,7 +18,7 @@ class Filter_Spyc implements Filter, Serializer
 	*/
 	public function __construct($config)
 	{
-		require_once PHPCACHE_ROOT.'lib/spyc.php';
+		require_once PHPCACHE_ROOT.'../lib/spyc.php';
 	}
 
 	public function encode($data)
