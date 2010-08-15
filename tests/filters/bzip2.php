@@ -7,6 +7,6 @@ class BZip2Test extends FilterTest
 {
 	public function __construct()
 	{
-		parent::__construct('bzip2', array('level' => 0));
+		parent::__construct('bzip2', array('level' => 5));
 	}
 }

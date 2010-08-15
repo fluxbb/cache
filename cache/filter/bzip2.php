@@ -18,7 +18,7 @@ class Filter_BZip2 implements Filter
 	/**
 	* Initialise a new BZip2 filter.
 	* 
-	* @param	level	The compression level to use, ranging from 0-9. Defaults to 4
+	* @param	level	The compression level to use, ranging from 1-9. Defaults to 4
 	*/
 	public function __construct($config)
 	{

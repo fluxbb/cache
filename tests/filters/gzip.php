@@ -7,6 +7,6 @@ class GZipTest extends FilterTest
 {
 	public function __construct()
 	{
-		parent::__construct('gzip', array('level' => 0));
+		parent::__construct('gzip', array('level' => 5));
 	}
 }
