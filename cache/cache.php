@@ -27,10 +27,13 @@ abstract class Cache extends FilterUser
 			$serializer_args = array();
 		}
 
-		// Instantiate the correct class and confirm it extends us
-		$cache = call_user_func(array(new ReflectionClass('Cache_'.$type), 'newInstance'), $args);
-		if (!is_subclass_of($cache, 'Cache'))
+		// Confirm the chosen class extends us
+		$class = new ReflectionClass('Cache_'.$type);
+		if ($class->isSubclassOf('Cache') === false)
 			throw new Exception('Does not conform to the cache interface: '.$type);
+
+		// Instantiate the cache
+		$cache = $class->newInstance($args);
 
 		// Add a serialize filter by default as not all caches can handle storing PHP objects
 		$serializer = $cache->add_filter($serializer_type, $serializer_args);

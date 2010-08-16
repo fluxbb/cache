@@ -36,10 +36,13 @@ class FilterUser
 		if (!class_exists('Filter_'.$type))
 			throw new Exception('Unknown filter: '.$type);
 
-		// Instantiate the correct class and confirm it implements the Filter interface
-		$filter = call_user_func(array(new ReflectionClass('Filter_'.$type), 'newInstance'), $args);
-		if (!($filter instanceof Filter))
+		// Confirm the chosen class implements Filter
+		$class = new ReflectionClass('Filter_'.$type);
+		if ($class->implementsInterface('Filter') === false)
 			throw new Exception('Does not conform to the filter interface: '.$type);
+
+		// Instantiate the filter
+		$filter = $class->newInstance($args);
 
 		$this->num_filters++;
 		$this->filters[] = $filter;
