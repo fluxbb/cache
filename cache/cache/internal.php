@@ -24,7 +24,6 @@ class Cache_Internal extends Cache
 	// Since we are emulating the TTL we need to override set()
 	public function set($key, $data, $ttl = 0)
 	{
-		// APC does support TTL however not within a single session so lets emulate it
 		$data = array('expire' => $ttl > 0 ? time() + $ttl : 0, 'data' => $data);
 
 		parent::set($key, $data, $ttl);
