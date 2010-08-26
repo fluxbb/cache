@@ -21,39 +21,9 @@ class Cache_Internal extends Cache
 		$this->data = array();
 	}
 
-	// Since we are emulating the TTL we need to override set()
-	public function set($key, $data, $ttl = 0)
-	{
-		$data = array('expire' => $ttl > 0 ? time() + $ttl : 0, 'data' => $data);
-
-		parent::set($key, $data, $ttl);
-	}
-
 	protected function _set($key, $data, $ttl)
 	{
-		$this->data[$key] = $data;
-	}
-
-	// Since we are emulating the TTL we need to override get()
-	public function get($key)
-	{
-		$data = parent::get($key);
-		if ($data === self::NOT_FOUND)
-			return self::NOT_FOUND;
-
-		// Check if the data has expired
-		if ($data['expire'] > 0 && $data['expire'] < time())
-		{
-			$this->delete($key);
-
-			// Correct the hit/miss counts
-			$this->hits--;
-			$this->misses++;
-
-			return self::NOT_FOUND;
-		}
-
-		return $data['data'];
+		$this->data[$key] = array('expire' => $ttl > 0 ? time() + $ttl : 0, 'data' => $data);
 	}
 
 	protected function _get($key)
@@ -61,7 +31,16 @@ class Cache_Internal extends Cache
 		if (!array_key_exists($key, $this->data))
 			return self::NOT_FOUND;
 
-		return $this->data[$key];
+		$data = $this->data[$key];
+
+		// Check if the data has expired
+		if ($data['expire'] > 0 && $data['expire'] < time())
+		{
+			$this->delete($key);
+			return self::NOT_FOUND;
+		}
+
+		return $data['data'];
 	}
 
 	public function delete($key)
@@ -71,7 +50,7 @@ class Cache_Internal extends Cache
 
 	public function clear()
 	{
-		unset ($this->data);
+		unset($this->data);
 		$this->data = array();
 	}
 }
