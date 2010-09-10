@@ -35,6 +35,10 @@ abstract class Cache extends FilterUser
 		// Instantiate the cache
 		$cache = $class->newInstance($args);
 
+		// If we have a prefix defined, set it
+		if (isset($args['prefix']))
+			$cache->prefix = $args['prefix'];
+
 		// Add a serialize filter by default as not all caches can handle storing PHP objects
 		$serializer = $cache->add_filter($serializer_type, $serializer_args);
 		if (!($serializer instanceof Serializer))
@@ -46,11 +50,12 @@ abstract class Cache extends FilterUser
 	public $inserts = 0;
 	public $hits = 0;
 	public $misses = 0;
+	protected $prefix = '';
 
 	public function set($key, $data, $ttl = 0)
 	{
 		$data = $this->encode($data);
-		$this->_set($key, $data, $ttl);
+		$this->_set($this->prefix.$key, $data, $ttl);
 		$this->inserts++;
 	}
 
@@ -58,7 +63,7 @@ abstract class Cache extends FilterUser
 
 	public function get($key)
 	{
-		$data = $this->_get($key);
+		$data = $this->_get($this->prefix.$key);
 		if ($data === self::NOT_FOUND)
 		{
 			$this->misses++;
@@ -73,6 +78,12 @@ abstract class Cache extends FilterUser
 
 	protected abstract function _get($key);
 
-	public abstract function delete($key);
+	public function delete($key)
+	{
+		$this->_delete($this->prefix.$key);
+	}
+
+	protected abstract function _delete($key);
+
 	public abstract function clear();
 }

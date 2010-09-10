@@ -65,7 +65,7 @@ class Cache_APC extends Cache
 		return $data;
 	}
 
-	public function delete($key)
+	protected function _delete($key)
 	{
 		apc_delete($key);
 	}

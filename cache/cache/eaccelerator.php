@@ -34,7 +34,7 @@ class Cache_eAccelerator extends Cache
 		return $data;
 	}
 
-	public function delete($key)
+	protected function _delete($key)
 	{
 		eaccelerator_rm($key);
 	}

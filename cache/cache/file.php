@@ -77,7 +77,7 @@ class Cache_File extends Cache
 		return $data;
 	}
 
-	public function delete($key)
+	protected function _delete($key)
 	{
 		@unlink($this->dir.$this->key($key).self::SUFFIX);
 	}

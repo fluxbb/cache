@@ -43,7 +43,7 @@ class Cache_Internal extends Cache
 		return $data['data'];
 	}
 
-	public function delete($key)
+	protected function _delete($key)
 	{
 		unset($this->data[$key]);
 	}

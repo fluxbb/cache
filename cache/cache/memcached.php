@@ -63,7 +63,7 @@ class Cache_Memcached extends Cache
 		return $data;
 	}
 
-	public function delete($key)
+	protected function _delete($key)
 	{
 		$this->memcached->delete($key);
 	}

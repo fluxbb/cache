@@ -41,7 +41,7 @@ class Cache_Zend_Disk extends Cache
 		return $data;
 	}
 
-	public function delete($key)
+	protected function _delete($key)
 	{
 		zend_disk_cache_delete($this->key($key));
 	}

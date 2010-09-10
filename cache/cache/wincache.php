@@ -36,7 +36,7 @@ class Cache_WinCache extends Cache
 		return $data;
 	}
 
-	public function delete($key)
+	protected function _delete($key)
 	{
 		wincache_ucache_delete($key);
 	}

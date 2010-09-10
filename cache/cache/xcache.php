@@ -34,7 +34,7 @@ class Cache_XCache extends Cache
 		return $data;
 	}
 
-	public function delete($key)
+	protected function _delete($key)
 	{
 		xcache_unset($key);
 	}

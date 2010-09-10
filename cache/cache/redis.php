@@ -64,7 +64,7 @@ class Cache_Redis extends Cache
 		return $data;
 	}
 
-	public function delete($key)
+	protected function _delete($key)
 	{
 		$this->redis->delete($key);
 	}
