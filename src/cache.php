@@ -17,9 +17,8 @@ abstract class Cache extends FilterUser
 
 	public static function load($type, $args = array(), $serializer_type = false, $serializer_args = array())
 	{
-		@include_once PHPCACHE_ROOT.'cache/'.$type.'.php';
 		if (!class_exists('Cache_'.$type))
-			throw new Exception('Unknown cache: '.$type);
+			require PHPCACHE_ROOT.'cache/'.$type.'.php';
 
 		if ($serializer_type === false)
 		{
@@ -40,9 +39,7 @@ abstract class Cache extends FilterUser
 			$cache->prefix = $args['prefix'];
 
 		// Add a serialize filter by default as not all caches can handle storing PHP objects
-		$serializer = $cache->add_filter($serializer_type, $serializer_args);
-		if (!($serializer instanceof Serializer))
-			throw new Exception('Attempted to add serializer that does not implement the Serializer interface: '.$serializer_type);
+		$cache->add_filter($serializer_type, $serializer_args);
 
 		return $cache;
 	}

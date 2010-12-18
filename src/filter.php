@@ -32,9 +32,8 @@ class FilterUser
 
 	public function add_filter($type, $args = array())
 	{
-		@include_once PHPCACHE_ROOT.'filter/'.$type.'.php';
 		if (!class_exists('Filter_'.$type))
-			throw new Exception('Unknown filter: '.$type);
+			require PHPCACHE_ROOT.'filter/'.$type.'.php';
 
 		// Confirm the chosen class implements Filter
 		$class = new ReflectionClass('Filter_'.$type);
