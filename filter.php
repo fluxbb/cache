@@ -5,9 +5,6 @@
 * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
 */
 
-if (!defined('PHPCACHE_ROOT'))
-	define('PHPCACHE_ROOT', dirname(__FILE__).'/');
-
 interface Serializer
 {
 

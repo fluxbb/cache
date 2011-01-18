@@ -80,6 +80,10 @@ class Cache_File extends Cache
 	protected function _delete($key)
 	{
 		@unlink($this->dir.$this->key($key).self::SUFFIX);
+
+		// Incase we are using APC with apc.stat=0
+		if (function_exists('apc_delete_file'))
+			@apc_delete_file($this->dir.$this->key($key).self::SUFFIX);
 	}
 
 	public function clear()
