@@ -27,18 +27,14 @@ class FilterUser
 		$this->filters = array();
 	}
 
-	public function add_filter($type, $args = array())
+	public final function add_filter($type, $args = array())
 	{
 		if (!class_exists('Filter_'.$type))
 			require PHPCACHE_ROOT.'filter/'.$type.'.php';
 
-		// Confirm the chosen class implements Filter
-		$class = new ReflectionClass('Filter_'.$type);
-		if ($class->implementsInterface('Filter') === false)
-			throw new Exception('Does not conform to the filter interface: '.$type);
-
 		// Instantiate the filter
-		$filter = $class->newInstance($args);
+		$type = 'Filter_'.$type;
+		$filter = new $type($args);
 
 		$this->num_filters++;
 		$this->filters[] = $filter;

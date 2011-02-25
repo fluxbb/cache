@@ -15,7 +15,7 @@ abstract class Cache extends FilterUser
 	const NOT_FOUND = 'Cache::NOT_FOUND';
 	const DEFAULT_SERIALIZER = 'serialize';
 
-	public static function load($type, $args = array(), $serializer_type = false, $serializer_args = array())
+	public static final function load($type, $args = array(), $serializer_type = false, $serializer_args = array())
 	{
 		if (!class_exists('Cache_'.$type))
 			require PHPCACHE_ROOT.'cache/'.$type.'.php';
@@ -26,13 +26,9 @@ abstract class Cache extends FilterUser
 			$serializer_args = array();
 		}
 
-		// Confirm the chosen class extends us
-		$class = new ReflectionClass('Cache_'.$type);
-		if ($class->isSubclassOf('Cache') === false)
-			throw new Exception('Does not conform to the cache interface: '.$type);
-
 		// Instantiate the cache
-		$cache = $class->newInstance($args);
+		$type = 'Cache_'.$type;
+		$cache = new $type($args);
 
 		// If we have a prefix defined, set it
 		if (isset($args['prefix']))
