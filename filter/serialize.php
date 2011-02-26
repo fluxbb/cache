@@ -5,7 +5,7 @@
  * This filter can be loaded by default as not all cache layers
  * support storing PHP objects.
  * 
- * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
+ * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 

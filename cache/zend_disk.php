@@ -4,7 +4,7 @@
  * The Zend Disk cache stores data using Zend disk.
  * http://files.zend.com/help/Zend-Platform/zend_cache_api.htm
  * 
- * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
+ * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 

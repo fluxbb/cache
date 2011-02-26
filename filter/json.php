@@ -6,7 +6,7 @@
  * support storing PHP objects.
  * http://uk2.php.net/manual/en/book.json.php
  * 
- * Copyright (C) 2010 Frank Smit (http://61924.nl)
+ * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 

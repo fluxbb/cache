@@ -6,7 +6,7 @@
  * support storing PHP objects.
  * http://pear.php.net/package/XML_Serializer/
  * 
- * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
+ * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 

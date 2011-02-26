@@ -4,7 +4,7 @@
  * The GZip filter compresses data using GZip.
  * http://uk2.php.net/manual/en/book.zlib.php
  * 
- * Copyright (C) 2010 Jamie Furness (http://www.jamierf.co.uk)
+ * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
