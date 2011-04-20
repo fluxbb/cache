@@ -3,12 +3,12 @@
 /**
  * The Memcache cache stores data using the Memcache extension for Memcached.
  * http://uk2.php.net/manual/en/book.memcache.php
- * 
+ *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Cache_Memcache extends Cache
+class MemcacheCache extends Cache
 {
 	const DEFAULT_HOST = 'localhost';
 	const DEFAULT_PORT = 11211;
@@ -17,7 +17,7 @@ class Cache_Memcache extends Cache
 
 	/**
 	* Initialise a new Memcache cache.
-	* 
+	*
 	* @param	instance	An existing Memcache instance to reuse (if
 							specified the other params are ignored)
 	* @param	host		The memcached server host, defaults to localhost

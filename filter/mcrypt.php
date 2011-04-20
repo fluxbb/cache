@@ -3,12 +3,12 @@
 /**
  * The MCrypt filter encrypts data using the given cipher and secret key.
  * http://uk2.php.net/manual/en/book.mcrypt.php
- * 
+ *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Filter_MCrypt implements Filter
+class MCryptFilter implements Filter
 {
 	const DEFAULT_CIPHER = MCRYPT_RIJNDAEL_128;
 	const DEFAULT_MODE = MCRYPT_MODE_ECB;
@@ -20,7 +20,7 @@ class Filter_MCrypt implements Filter
 
 	/**
 	* Initialise a new MCrypt filter.
-	* 
+	*
 	* @param	secret	The secret key to encrypt/decrypt data with
 	* @param	cipher	The cipher to use, defaults to MCRYPT_RIJNDAEL_128
 	* @param	mode	The block cipher mode to use, defaults to MCRYPT_MODE_ECB

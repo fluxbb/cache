@@ -4,12 +4,12 @@
 * The BZip2 filter compresses data using BZip2. BZip2 can reach a higher
 * compression ratio than GZip but is considerabily slower.
 * http://uk2.php.net/manual/en/book.bzip2.php
-* 
+*
 * Copyright (C) 2011 FluxBB (http://fluxbb.org)
 * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
 */
 
-class Filter_BZip2 implements Filter
+class BZip2Filter implements Filter
 {
 	const DEFAULT_LEVEL = 4;
 
@@ -17,7 +17,7 @@ class Filter_BZip2 implements Filter
 
 	/**
 	* Initialise a new BZip2 filter.
-	* 
+	*
 	* @param	level	The compression level to use, ranging from 1-9. Defaults to 4
 	*/
 	public function __construct($config)

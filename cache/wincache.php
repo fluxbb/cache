@@ -3,12 +3,12 @@
 /**
  * The Wincache cache stores data using the Windows Cache extension.
  * http://uk2.php.net/manual/en/book.wincache.php
- * 
+ *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Cache_WinCache extends Cache
+class WinCacheCache extends Cache
 {
 	/**
 	* Initialise a new WinCache cache.

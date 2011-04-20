@@ -3,12 +3,12 @@
 /**
  * The eAccelerator cache stores data using eAccelerator.
  * http://eaccelerator.net
- * 
+ *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Cache_eAccelerator extends Cache
+class eAcceleratorCache extends Cache
 {
 	/**
 	* Initialise a new eAccelerator cache.

@@ -3,12 +3,12 @@
 /**
  * The APC cache stores data using APC.
  * http://uk2.php.net/manual/en/book.apc.php
- * 
+ *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Cache_APC extends Cache
+class APCCache extends Cache
 {
 	/**
 	* Initialise a new APC cache.

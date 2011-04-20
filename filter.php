@@ -29,11 +29,11 @@ class FilterUser
 
 	public final function add_filter($type, $args = array())
 	{
-		if (!class_exists('Filter_'.$type))
+		if (!class_exists($type.'Filter'))
 			require PHPCACHE_ROOT.'filter/'.$type.'.php';
 
 		// Instantiate the filter
-		$type = 'Filter_'.$type;
+		$type = $type.'Filter';
 		$filter = new $type($args);
 
 		$this->num_filters++;

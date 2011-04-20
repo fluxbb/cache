@@ -17,7 +17,7 @@ abstract class Cache extends FilterUser
 
 	public static final function load($type, $args = array(), $serializer_type = false, $serializer_args = array())
 	{
-		if (!class_exists('Cache_'.$type))
+		if (!class_exists($type.'Cache'))
 			require PHPCACHE_ROOT.'cache/'.$type.'.php';
 
 		if ($serializer_type === false)
@@ -27,7 +27,7 @@ abstract class Cache extends FilterUser
 		}
 
 		// Instantiate the cache
-		$type = 'Cache_'.$type;
+		$type = $type.'Cache';
 		$cache = new $type($args);
 
 		// If we have a prefix defined, set it

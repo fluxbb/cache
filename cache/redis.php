@@ -3,12 +3,12 @@
 /**
  * The Redis cache stores data using Redis via the phpredis extension.
  * http://github.com/owlient/phpredis
- * 
+ *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Cache_Redis extends Cache
+class RedisCache extends Cache
 {
 	const DEFAULT_HOST = 'localhost';
 	const DEFAULT_PORT = 6379;
@@ -17,7 +17,7 @@ class Cache_Redis extends Cache
 
 	/**
 	* Initialise a new Redis cache.
-	* 
+	*
 	* @param	instance	An existing Redis instance to reuse (if
 							specified the other params are ignored)
 	* @param	host		The redis server host, defaults to localhost

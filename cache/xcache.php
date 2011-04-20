@@ -3,12 +3,12 @@
 /**
  * The XCache cache stores data using XCache.
  * http://xcache.lighttpd.net
- * 
+ *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Cache_XCache extends Cache
+class XCacheCache extends Cache
 {
 	/**
 	* Initialise a new XCache cache.

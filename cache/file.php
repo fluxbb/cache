@@ -2,12 +2,12 @@
 
 /**
  * The File cache stores data using regular files.
- * 
+ *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Cache_File extends Cache
+class FileCache extends Cache
 {
 	const SUFFIX = '.cache';
 
@@ -15,7 +15,7 @@ class Cache_File extends Cache
 
 	/**
 	* Initialise a new File cache.
-	* 
+	*
 	* @param	dir	The directory in which to store cache files. Must be
 					writable by PHP and will be created if required.
 	*/

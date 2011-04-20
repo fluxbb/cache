@@ -5,12 +5,12 @@
  * This filter can be loaded by default as not all cache layers
  * support storing PHP objects.
  * http://pear.php.net/package/XML_Serializer/
- * 
+ *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Filter_XML implements Filter, Serializer
+class XMLFilter implements Filter, Serializer
 {
 	private $serializer;
 	private $unserializer;

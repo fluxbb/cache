@@ -3,12 +3,12 @@
 /**
  * The LZF filter compresses data using LZF.
  * http://uk2.php.net/manual/en/book.lzf.php
- * 
+ *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Filter_LZF implements Filter
+class LZFFilter implements Filter
 {
 	private $level;
 
