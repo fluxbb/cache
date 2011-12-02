@@ -5,18 +5,18 @@
 * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
 */
 
-interface Serializer
+interface Flux_Cache_Serializer
 {
 
 }
 
-interface Filter
+interface Flux_Cache_Filter
 {
 	public function encode($data);
 	public function decode($data);
 }
 
-class FilterUser
+class Flux_Cache_FilterUser
 {
 	private $num_filters;
 	private $filters;
@@ -29,11 +29,11 @@ class FilterUser
 
 	public final function add_filter($type, $args = array())
 	{
-		if (!class_exists($type.'Filter'))
+		if (!class_exists('Flux_Cache_Filter_'.$type))
 			require PHPCACHE_ROOT.'filter/'.$type.'.php';
 
 		// Instantiate the filter
-		$type = $type.'Filter';
+		$type = 'Flux_Cache_Filter_'.$type;
 		$filter = new $type($args);
 
 		$this->num_filters++;

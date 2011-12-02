@@ -10,7 +10,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class JSONFilter implements Filter, Serializer
+class Flux_Cache_Filter_JSON implements Flux_Cache_Filter, Flux_Cache_Serializer
 {
 
 	/**

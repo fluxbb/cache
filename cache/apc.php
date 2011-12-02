@@ -8,7 +8,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class APCCache extends Cache
+class Flux_Cache_APC extends Flux_Cache
 {
 	/**
 	* Initialise a new APC cache.

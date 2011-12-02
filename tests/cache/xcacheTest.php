@@ -6,7 +6,7 @@ class Cache_XCacheTest extends CacheTestCase
 {
 	public static function setUpBeforeClass()
 	{
-		self::$cache = Cache::load('xcache');
+		self::$cache = Flux_Cache::load('xcache');
 	}
 
 	public static function tearDownAfterClass()

@@ -8,7 +8,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class RedisCache extends Cache
+class Flux_Cache_Redis extends Flux_Cache
 {
 	const DEFAULT_HOST = 'localhost';
 	const DEFAULT_PORT = 6379;

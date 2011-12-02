@@ -8,7 +8,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class GZipFilter implements Filter
+class Flux_Cache_Filter_GZip implements Flux_Cache_Filter
 {
 	const DEFAULT_LEVEL = 4;
 

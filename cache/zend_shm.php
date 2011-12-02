@@ -8,7 +8,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Zend_SHMCache extends Cache
+class Flux_Cache_Zend_SHM extends Flux_Cache
 {
 	const NAMESPACE = 'php-cache';
 

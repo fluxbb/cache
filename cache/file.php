@@ -7,7 +7,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class FileCache extends Cache
+class Flux_Cache_File extends Flux_Cache
 {
 	const SUFFIX = '.cache';
 

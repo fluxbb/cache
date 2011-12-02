@@ -26,7 +26,7 @@ abstract class CacheTestCase extends PHPUnit_Framework_TestCase
 		self::$cache->delete($key);
 
 		$result = self::$cache->get($key);
-		$this->assertEquals($result, Cache::NOT_FOUND);
+		$this->assertEquals($result, Flux_Cache::NOT_FOUND);
 	}
 
 	public function provider()

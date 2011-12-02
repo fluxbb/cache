@@ -8,7 +8,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class XCacheCache extends Cache
+class Flux_Cache_XCache extends Flux_Cache
 {
 	/**
 	* Initialise a new XCache cache.

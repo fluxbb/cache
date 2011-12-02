@@ -8,7 +8,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class eAcceleratorCache extends Cache
+class Flux_Cache_eAccelerator extends Flux_Cache
 {
 	/**
 	* Initialise a new eAccelerator cache.

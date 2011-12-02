@@ -9,7 +9,7 @@
 * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
 */
 
-class BZip2Filter implements Filter
+class Flux_Cache_Filter_BZip2 implements Flux_Cache_Filter
 {
 	const DEFAULT_LEVEL = 4;
 

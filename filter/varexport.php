@@ -9,7 +9,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class VarExportFilter implements Filter, Serializer
+class Flux_Cache_Filter_VarExport implements Flux_Cache_Filter, Flux_Cache_Serializer
 {
 
 	/**

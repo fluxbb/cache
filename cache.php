@@ -10,14 +10,14 @@ if (!defined('PHPCACHE_ROOT'))
 
 require PHPCACHE_ROOT.'filter.php';
 
-abstract class Cache extends FilterUser
+abstract class Flux_Cache extends Flux_Cache_FilterUser
 {
-	const NOT_FOUND = 'Cache::NOT_FOUND';
+	const NOT_FOUND = 'Flux_Cache::NOT_FOUND';
 	const DEFAULT_SERIALIZER = 'serialize';
 
 	public static final function load($type, $args = array(), $serializer_type = false, $serializer_args = array())
 	{
-		if (!class_exists($type.'Cache'))
+		if (!class_exists('Flux_Cache_'.$type))
 			require PHPCACHE_ROOT.'cache/'.$type.'.php';
 
 		if ($serializer_type === false)
@@ -27,7 +27,7 @@ abstract class Cache extends FilterUser
 		}
 
 		// Instantiate the cache
-		$type = $type.'Cache';
+		$type = 'Flux_Cache_'.$type;
 		$cache = new $type($args);
 
 		// If we have a prefix defined, set it

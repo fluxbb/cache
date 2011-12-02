@@ -8,7 +8,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class LZFFilter implements Filter
+class Flux_Cache_Filter_LZF implements Flux_Cache_Filter
 {
 	private $level;
 

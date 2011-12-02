@@ -6,7 +6,7 @@ class Cache_FileTest extends CacheTestCase
 {
 	public static function setUpBeforeClass()
 	{
-		self::$cache = Cache::load('file', array('dir' => '/tmp/fluxbb-cache'));
+		self::$cache = Flux_Cache::load('file', array('dir' => '/tmp/fluxbb-cache'));
 	}
 
 	public static function tearDownAfterClass()
