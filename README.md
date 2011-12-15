@@ -44,13 +44,13 @@ License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/
 
 ## Example usage
 	// We want a file-based cache in the /tmp/php-cache/ dir - this will be created if possible. Obviously this path wont work on Windows!
-	$cache = Flux_Cache::load('file', array('dir' => '/tmp/php-cache/'));
+	$cache = Flux_Cache::load('File', array('dir' => '/tmp/php-cache/'));
 
 	// If we have the mcrypt extension lets encrypt the cache
 	if (extension_loaded('mcrypt'))
 	{
 		echo 'Adding mcrypt filter.'."\n";
-		$cache->add_filter('mcrypt', array('secret' => 'i like ponies'));
+		$cache->addFilter('mcrypt', array('secret' => 'i like ponies'));
 	}
 
 	// Check if there is already a value cached
