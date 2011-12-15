@@ -30,7 +30,7 @@ class Flux_Cache_FilterUser
 	public final function add_filter($type, $args = array())
 	{
 		if (!class_exists('Flux_Cache_Filter_'.$type))
-			require PHPCACHE_ROOT.'filter/'.$type.'.php';
+			require PHPCACHE_ROOT.'Filter/'.$type.'.php';
 
 		// Instantiate the filter
 		$type = 'Flux_Cache_Filter_'.$type;

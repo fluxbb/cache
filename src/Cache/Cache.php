@@ -8,17 +8,17 @@
 if (!defined('PHPCACHE_ROOT'))
 	define('PHPCACHE_ROOT', dirname(__FILE__).'/');
 
-require PHPCACHE_ROOT.'filter.php';
+require PHPCACHE_ROOT.'Filter.php';
 
 abstract class Flux_Cache extends Flux_Cache_FilterUser
 {
 	const NOT_FOUND = 'Flux_Cache::NOT_FOUND';
-	const DEFAULT_SERIALIZER = 'serialize';
+	const DEFAULT_SERIALIZER = 'Serialize';
 
 	public static final function load($type, $args = array(), $serializer_type = false, $serializer_args = array())
 	{
 		if (!class_exists('Flux_Cache_'.$type))
-			require PHPCACHE_ROOT.'cache/'.$type.'.php';
+			require PHPCACHE_ROOT.'Cache/'.$type.'.php';
 
 		if ($serializer_type === false)
 		{

@@ -1,6 +1,6 @@
 <?php
 
-define('PHPCACHE_ROOT', realpath(dirname(__FILE__).'/../').'/');
+define('PHPCACHE_ROOT', realpath(dirname(__FILE__).'/../').'/src/Cache/');
 require PHPCACHE_ROOT.'cache.php';
 
 abstract class CacheTestCase extends PHPUnit_Framework_TestCase
