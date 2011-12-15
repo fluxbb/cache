@@ -18,25 +18,30 @@ interface Flux_Cache_Filter
 
 class Flux_Cache_FilterUser
 {
-	private $num_filters;
+	private $numFilters;
 	private $filters;
 
 	public function __construct()
 	{
-		$this->num_filters = 0;
+		$this->numFilters = 0;
 		$this->filters = array();
 	}
 
-	public final function add_filter($type, $args = array())
+	public final function addFilter($type, $args = array())
 	{
 		if (!class_exists('Flux_Cache_Filter_'.$type))
+		{
+			if (!file_exists(PHPCACHE_ROOT.'Filter/'.$type.'.php'))
+				throw new Exception('Cache filter "'.$type.'" does not exist.');
+
 			require PHPCACHE_ROOT.'Filter/'.$type.'.php';
+		}
 
 		// Instantiate the filter
 		$type = 'Flux_Cache_Filter_'.$type;
 		$filter = new $type($args);
 
-		$this->num_filters++;
+		$this->numFilters++;
 		$this->filters[] = $filter;
 
 		return $filter;
@@ -44,7 +49,7 @@ class Flux_Cache_FilterUser
 
 	public function encode($data)
 	{
-		for ($i = 0;$i < $this->num_filters;$i++)
+		for ($i = 0; $i < $this->numFilters; $i++)
 			$data = $this->filters[$i]->encode($data);
 
 		return $data;
@@ -52,7 +57,7 @@ class Flux_Cache_FilterUser
 
 	public function decode($data)
 	{
-		for ($i = $this->num_filters - 1;$i >= 0;$i--)
+		for ($i = $this->numFilters - 1; $i >= 0; $i--)
 			$data = $this->filters[$i]->decode($data);
 
 		return $data;

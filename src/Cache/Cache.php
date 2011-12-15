@@ -18,7 +18,12 @@ abstract class Flux_Cache extends Flux_Cache_FilterUser
 	public static final function load($type, $args = array(), $serializer_type = false, $serializer_args = array())
 	{
 		if (!class_exists('Flux_Cache_'.$type))
+		{
+			if (!file_exists(PHPCACHE_ROOT.'Cache/'.$type.'.php'))
+				throw new Exception('Cache type "'.$type.'" does not exist.');
+
 			require PHPCACHE_ROOT.'Cache/'.$type.'.php';
+		}
 
 		if ($serializer_type === false)
 		{
@@ -35,7 +40,7 @@ abstract class Flux_Cache extends Flux_Cache_FilterUser
 			$cache->prefix = $args['prefix'];
 
 		// Add a serialize filter by default as not all caches can handle storing PHP objects
-		$cache->add_filter($serializer_type, $serializer_args);
+		$cache->addFilter($serializer_type, $serializer_args);
 
 		return $cache;
 	}
