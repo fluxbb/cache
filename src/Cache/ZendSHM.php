@@ -1,24 +1,24 @@
 <?php
 
 /**
- * The Zend Disk cache stores data using Zend disk.
+ * The Zend SHM cache stores data using Zend shared memory.
  * http://files.zend.com/help/Zend-Platform/zend_cache_api.htm
  *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Flux_Cache_Zend_Disk extends Flux_Cache
+class Flux_Cache_ZendSHM extends Flux_Cache
 {
 	const NAMESPACE = 'php-cache';
 
 	/**
-	* Initialise a new Zend Disk cache.
+	* Initialise a new Zend SHM cache.
 	*/
 	public function __construct($config)
 	{
 		if (!extension_loaded('zendcache'))
-			throw new Exception('The Zend Disk cache requires the ZendCache extension.');
+			throw new Exception('The Zend SHM cache requires the ZendCache extension.');
 	}
 
 	private function key($key)
@@ -28,13 +28,13 @@ class Flux_Cache_Zend_Disk extends Flux_Cache
 
 	protected function _set($key, $data, $ttl)
 	{
-		if (zend_disk_cache_store($this->key($key), $data, $ttl) === false)
-			throw new Exception('Unable to write Zend Disk cache: '.$key);
+		if (zend_shm_cache_store($this->key($key), $data, $ttl) === false)
+			throw new Exception('Unable to write Zend SHM cache: '.$key);
 	}
 
 	protected function _get($key)
 	{
-		$data = zend_disk_cache_fetch($this->key($key));
+		$data = zend_shm_cache_fetch($this->key($key));
 		if ($data === null)
 			return self::NOT_FOUND;
 
@@ -43,11 +43,11 @@ class Flux_Cache_Zend_Disk extends Flux_Cache
 
 	protected function _delete($key)
 	{
-		zend_disk_cache_delete($this->key($key));
+		zend_shm_cache_delete($this->key($key));
 	}
 
 	public function clear()
 	{
-		zend_disk_cache_clear(self::NAMESPACE);
+		zend_shm_cache_clear(self::NAMESPACE);
 	}
 }
