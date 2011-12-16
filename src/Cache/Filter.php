@@ -31,10 +31,10 @@ class Flux_Cache_FilterUser
 	{
 		if (!class_exists('Flux_Cache_Filter_'.$type))
 		{
-			if (!file_exists(PHPCACHE_ROOT.'Filter/'.$type.'.php'))
+			if (!file_exists(PHPCACHE_ROOT.'Cache/Filter/'.$type.'.php'))
 				throw new Exception('Cache filter "'.$type.'" does not exist.');
 
-			require PHPCACHE_ROOT.'Filter/'.$type.'.php';
+			require PHPCACHE_ROOT.'Cache/Filter/'.$type.'.php';
 		}
 
 		// Instantiate the filter

@@ -8,7 +8,7 @@
 if (!defined('PHPCACHE_ROOT'))
 	define('PHPCACHE_ROOT', dirname(__FILE__).'/');
 
-require PHPCACHE_ROOT.'Filter.php';
+require PHPCACHE_ROOT.'Cache/Filter.php';
 
 abstract class Flux_Cache extends Flux_Cache_FilterUser
 {

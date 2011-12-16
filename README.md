@@ -50,7 +50,7 @@ License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/
 	if (extension_loaded('mcrypt'))
 	{
 		echo 'Adding mcrypt filter.'."\n";
-		$cache->addFilter('mcrypt', array('secret' => 'i like ponies'));
+		$cache->addFilter('MCrypt', array('secret' => 'i like ponies'));
 	}
 
 	// Check if there is already a value cached
