@@ -1,9 +1,9 @@
 <?php
 
 define('PHPCACHE_ROOT', realpath(dirname(__FILE__).'/../').'/src/Cache/');
-require PHPCACHE_ROOT.'cache.php';
+require PHPCACHE_ROOT.'Cache.php';
 
-abstract class CacheTestCase extends PHPUnit_Framework_TestCase
+abstract class Flux_CacheTest extends PHPUnit_Framework_TestCase
 {
 	protected static $cache;
 

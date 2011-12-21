@@ -1,8 +1,8 @@
 <?php
 
-require_once dirname(__FILE__).'/../cache.php';
+require_once dirname(__FILE__).'/../Cache.php';
 
-class Cache_FileTest extends CacheTestCase
+class Flux_Cache_FileTest extends Flux_CacheTest
 {
 	public static function setUpBeforeClass()
 	{
