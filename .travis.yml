@@ -10,7 +10,7 @@ php:
 before_script:
   - "wget http://xcache.lighttpd.net/pub/Releases/1.3.2/xcache-1.3.2.tar.gz"
   - "tar -zxf xcache-*.tar.gz"
-  - "cd cache"
+  - "cd xcache-1.3.2"
   - "phpize"
   - "./configure --enable-xcache"
   - "make"
