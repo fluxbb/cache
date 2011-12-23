@@ -7,3 +7,4 @@ phpize
 make
 sudo make install
 echo zend_extension=~/.phpenv/versions/$(phpenv version-name)/lib/php/extensions/no-debug-non-zts-20090626/xcache.so > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xcache.ini
+cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xcache.ini
