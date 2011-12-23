@@ -6,4 +6,4 @@ phpize
 ./configure --enable-xcache
 make
 sudo make install
-cp ../xcache.ini ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
+echo zend_extension=~/.phpenv/versions/$(phpenv version-name)/lib/php/extensions/no-debug-non-zts-20090626/xcache.so > ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xcache.ini
