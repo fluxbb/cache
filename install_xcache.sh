@@ -6,4 +6,4 @@ phpize
 ./configure --enable-xcache
 make
 sudo make install
-cp xcache.ini ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
+cp ../xcache.ini ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
