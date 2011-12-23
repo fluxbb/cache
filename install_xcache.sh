@@ -7,4 +7,3 @@ phpize
 make
 sudo make install
 cp xcache.ini ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d
-rm ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
