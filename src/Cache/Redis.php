@@ -43,7 +43,7 @@ class Flux_Cache_Redis extends Flux_Cache
 	* Initialise a new Redis cache.
 	*
 	* @param	instance	An existing Redis instance to reuse (if
-							specified the other params are ignored)
+	*						specified the other params are ignored)
 	* @param	host		The redis server host, defaults to localhost
 	* @param	port		The redis server port, defaults to 6379
 	* @param	password	The redis server password, if required

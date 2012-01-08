@@ -43,7 +43,7 @@ class Flux_Cache_Memcache extends Flux_Cache
 	* Initialise a new Memcache cache.
 	*
 	* @param	instance	An existing Memcache instance to reuse (if
-							specified the other params are ignored)
+	*						specified the other params are ignored)
 	* @param	host		The memcached server host, defaults to localhost
 	* @param	port		The memcached server port, defaults to 11211
 	*/

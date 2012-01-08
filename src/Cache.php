@@ -34,7 +34,7 @@ abstract class Flux_Cache extends Flux_Cache_FilterUser
 	const NOT_FOUND = 'Flux_Cache::NOT_FOUND';
 	const DEFAULT_SERIALIZER = 'Serialize';
 
-	public static final function load($type, $args = array(), $serializer_type = false, $serializer_args = array())
+	public static final function load($type, $args = array(), $serializerType = false, $serializerArgs = array())
 	{
 		if (!class_exists('Flux_Cache_'.$type))
 		{
@@ -44,10 +44,10 @@ abstract class Flux_Cache extends Flux_Cache_FilterUser
 			require PHPCACHE_ROOT.'Cache/'.$type.'.php';
 		}
 
-		if ($serializer_type === false)
+		if ($serializerType === false)
 		{
-			$serializer_type = self::DEFAULT_SERIALIZER;
-			$serializer_args = array();
+			$serializerType = self::DEFAULT_SERIALIZER;
+			$serializerArgs = array();
 		}
 
 		// Instantiate the cache
@@ -59,7 +59,7 @@ abstract class Flux_Cache extends Flux_Cache_FilterUser
 			$cache->prefix = $args['prefix'];
 
 		// Add a serialize filter by default as not all caches can handle storing PHP objects
-		$cache->addFilter($serializer_type, $serializer_args);
+		$cache->addFilter($serializerType, $serializerArgs);
 
 		return $cache;
 	}

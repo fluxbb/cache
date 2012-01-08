@@ -41,7 +41,7 @@ class Flux_Cache_File extends Flux_Cache
 	* Initialise a new File cache.
 	*
 	* @param	dir	The directory in which to store cache files. Must be
-					writable by PHP and will be created if required.
+	*				writable by PHP and will be created if required.
 	*/
 	public function __construct($config)
 	{
