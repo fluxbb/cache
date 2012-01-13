@@ -33,9 +33,10 @@
 
 class Flux_Cache_File extends Flux_Cache
 {
-	const SUFFIX = '.cache';
+	const DEFAULT_SUFFIX = '.cache';
 
 	private $dir;
+	private $suffix;
 
 	/**
 	* Initialise a new File cache.
@@ -48,6 +49,8 @@ class Flux_Cache_File extends Flux_Cache
 		$this->dir = $config['dir'];
 		if ((!is_dir($this->dir) && !mkdir($this->dir, 0777, true)) || !is_writable($this->dir))
 			throw new Exception('Unable to write to cache dir: '.$this->dir);
+
+		$this->suffix = isset($config['suffix']) ? $config['suffix'] : self::DEFAULT_SUFFIX;
 	}
 
 	private function key($key)
@@ -66,7 +69,7 @@ class Flux_Cache_File extends Flux_Cache
 
 	protected function _set($key, $data, $ttl)
 	{
-		if (@file_put_contents($this->dir.$this->key($key).self::SUFFIX, $data) === false)
+		if (@file_put_contents($this->dir.$this->key($key).$this->suffix, $data) === false)
 			throw new Exception('Unable to write file cache: '.$key);
 	}
 
@@ -94,7 +97,7 @@ class Flux_Cache_File extends Flux_Cache
 
 	protected function _get($key)
 	{
-		$data = @file_get_contents($this->dir.$this->key($key).self::SUFFIX);
+		$data = @file_get_contents($this->dir.$this->key($key).$this->suffix);
 		if ($data === false)
 			return self::NOT_FOUND;
 
@@ -103,16 +106,16 @@ class Flux_Cache_File extends Flux_Cache
 
 	protected function _delete($key)
 	{
-		@unlink($this->dir.$this->key($key).self::SUFFIX);
+		@unlink($this->dir.$this->key($key).$this->suffix);
 
 		// Incase we are using APC with apc.stat=0
 		if (function_exists('apc_delete_file'))
-			@apc_delete_file($this->dir.$this->key($key).self::SUFFIX);
+			@apc_delete_file($this->dir.$this->key($key).$this->suffix);
 	}
 
 	public function clear()
 	{
-		$files = glob($this->dir.'*'.self::SUFFIX);
+		$files = glob($this->dir.'*'.$this->suffix);
 		foreach ($files as $file)
 			@unlink($file);
 	}
