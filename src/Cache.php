@@ -27,9 +27,9 @@
 if (!defined('PHPCACHE_ROOT'))
 	define('PHPCACHE_ROOT', dirname(__FILE__).'/');
 
-require PHPCACHE_ROOT.'Cache/Filter.php';
+require PHPCACHE_ROOT.'Filter.php';
 
-abstract class Flux_Cache extends Flux_Cache_FilterUser
+abstract class Flux_Cache extends Flux_FilterUser
 {
 	const NOT_FOUND = 'Flux_Cache::NOT_FOUND';
 	const DEFAULT_SERIALIZER = 'Serialize';

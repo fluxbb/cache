@@ -25,40 +25,39 @@
  */
 
 /**
-* The BZip2 filter compresses data using BZip2. BZip2 can reach a higher
-* compression ratio than GZip but is considerabily slower.
-* http://uk2.php.net/manual/en/book.bzip2.php
-*
-* Copyright (C) 2011 FluxBB (http://fluxbb.org)
-* License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
-*/
+ * The GZip filter compresses data using GZip.
+ * http://uk2.php.net/manual/en/book.zlib.php
+ *
+ * Copyright (C) 2011 FluxBB (http://fluxbb.org)
+ * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
+ */
 
-class Flux_Cache_Filter_BZip2 implements Flux_Cache_Filter
+class Flux_Filter_GZip implements Flux_Filter
 {
 	const DEFAULT_LEVEL = 4;
 
 	private $level;
 
 	/**
-	* Initialise a new BZip2 filter.
+	* Initialise a new GZip filter.
 	*
-	* @param	level	The compression level to use, ranging from 1-9. Defaults to 4
+	* @param	level	The compression level to use, ranging from 0-9. Defaults to 4
 	*/
 	public function __construct($config)
 	{
-		if (!extension_loaded('bz2'))
-			throw new Exception('The BZip2 filter requires the bz2 extension.');
+		if (!extension_loaded('zlib'))
+			throw new Exception('The GZip filter requires the Zlib extension.');
 
 		$this->level = isset($config['level']) ? $config['level'] : self::DEFAULT_LEVEL;
 	}
 
 	public function encode($data)
 	{
-		return bzcompress($data, $this->level);
+		return gzdeflate($data, $this->level);
 	}
 
 	public function decode($data)
 	{
-		return bzdecompress($data);
+		return gzinflate($data);
 	}
 }

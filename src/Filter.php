@@ -29,18 +29,18 @@
 * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
 */
 
-interface Flux_Cache_Serializer
+interface Flux_Serializer extends Flux_Filter
 {
 
 }
 
-interface Flux_Cache_Filter
+interface Flux_Filter
 {
 	public function encode($data);
 	public function decode($data);
 }
 
-class Flux_Cache_FilterUser
+class Flux_FilterUser
 {
 	private $numFilters;
 	private $filters;
@@ -53,16 +53,16 @@ class Flux_Cache_FilterUser
 
 	public final function addFilter($type, $args = array())
 	{
-		if (!class_exists('Flux_Cache_Filter_'.$type))
+		if (!class_exists('Flux_Filter_'.$type))
 		{
-			if (!file_exists(PHPCACHE_ROOT.'Cache/Filter/'.$type.'.php'))
-				throw new Exception('Cache filter "'.$type.'" does not exist.');
+			if (!file_exists(PHPCACHE_ROOT.'Filter/'.$type.'.php'))
+				throw new Exception('Filter "'.$type.'" does not exist.');
 
-			require PHPCACHE_ROOT.'Cache/Filter/'.$type.'.php';
+			require PHPCACHE_ROOT.'Filter/'.$type.'.php';
 		}
 
 		// Instantiate the filter
-		$type = 'Flux_Cache_Filter_'.$type;
+		$type = 'Flux_Filter_'.$type;
 		$filter = new $type($args);
 
 		$this->numFilters++;

@@ -25,39 +25,33 @@
  */
 
 /**
- * The GZip filter compresses data using GZip.
- * http://uk2.php.net/manual/en/book.zlib.php
+ * The JSON filter serializes data into json string form.
+ * This filter can be loaded by default as not all cache layers
+ * support storing PHP objects.
+ * http://uk2.php.net/manual/en/book.json.php
  *
  * Copyright (C) 2011 FluxBB (http://fluxbb.org)
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Flux_Cache_Filter_GZip implements Flux_Cache_Filter
+class Flux_Filter_JSON implements Flux_Serializer
 {
-	const DEFAULT_LEVEL = 4;
-
-	private $level;
 
 	/**
-	* Initialise a new GZip filter.
-	*
-	* @param	level	The compression level to use, ranging from 0-9. Defaults to 4
+	* Initialise a new JSON filter.
 	*/
 	public function __construct($config)
 	{
-		if (!extension_loaded('zlib'))
-			throw new Exception('The GZip filter requires the Zlib extension.');
 
-		$this->level = isset($config['level']) ? $config['level'] : self::DEFAULT_LEVEL;
 	}
 
 	public function encode($data)
 	{
-		return gzdeflate($data, $this->level);
+		return json_encode($data);
 	}
 
 	public function decode($data)
 	{
-		return gzinflate($data);
+		return json_decode($data);
 	}
 }

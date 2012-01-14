@@ -33,7 +33,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Flux_Cache_Filter_Serialize implements Flux_Cache_Filter, Flux_Cache_Serializer
+class Flux_Filter_Serialize implements Flux_Serializer
 {
 
 	/**

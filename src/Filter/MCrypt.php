@@ -32,7 +32,7 @@
  * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Flux_Cache_Filter_MCrypt implements Flux_Cache_Filter
+class Flux_Filter_MCrypt implements Flux_Filter
 {
 	const DEFAULT_CIPHER = MCRYPT_RIJNDAEL_128;
 	const DEFAULT_MODE = MCRYPT_MODE_ECB;
