@@ -20,6 +20,7 @@
  *
  * @category	FluxBB
  * @package		Cache
+ * @subpackage	Modules
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
