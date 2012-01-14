@@ -19,19 +19,18 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
 
 /**
  * The File cache stores data using regular files.
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Flux_Cache_File extends Flux_Cache
+namespace fluxbb\cache\modules;
+
+class File extends \fluxbb\cache\Cache
 {
 	const DEFAULT_SUFFIX = '.cache';
 
@@ -47,8 +46,8 @@ class Flux_Cache_File extends Flux_Cache
 	public function __construct($config)
 	{
 		$this->dir = $config['dir'];
-		if ((!is_dir($this->dir) && !mkdir($this->dir, 0777, true)) || !is_writable($this->dir))
-			throw new Exception('Unable to write to cache dir: '.$this->dir);
+		if ((!is_dir($this->dir) && !@mkdir($this->dir, 0777, true)) || !is_writable($this->dir))
+			throw new \fluxbb\cache\Exception('Unable to write to cache dir: '.$this->dir);
 
 		$this->suffix = isset($config['suffix']) ? $config['suffix'] : self::DEFAULT_SUFFIX;
 	}
@@ -70,7 +69,7 @@ class Flux_Cache_File extends Flux_Cache
 	protected function _set($key, $data, $ttl)
 	{
 		if (@file_put_contents($this->dir.$this->key($key).$this->suffix, $data) === false)
-			throw new Exception('Unable to write file cache: '.$key);
+			throw new \fluxbb\cache\Exception('Unable to write file cache: '.$key);
 	}
 
 	// Since we are emulating the TTL we need to override get()

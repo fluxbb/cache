@@ -19,46 +19,38 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
 
 /**
- * The Zend SHM cache stores data using Zend shared memory.
- * http://files.zend.com/help/Zend-Platform/zend_cache_api.htm
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
+ * The XCache cache stores data using XCache.
+ * http://xcache.lighttpd.net
  */
 
-class Flux_Cache_ZendSHM extends Flux_Cache
-{
-	const NAMESPACE = 'php-cache';
+namespace fluxbb\cache\modules;
 
+class XCache extends \fluxbb\cache\Cache
+{
 	/**
-	* Initialise a new Zend SHM cache.
+	* Initialise a new XCache cache.
 	*/
 	public function __construct($config)
 	{
-		if (!extension_loaded('zendcache'))
-			throw new Exception('The Zend SHM cache requires the ZendCache extension.');
-	}
-
-	private function key($key)
-	{
-		return self::NAMESPACE.'::'.$key;
+		if (!extension_loaded('xcache'))
+			throw new \fluxbb\cache\Exception('The XCache cache requires the XCache extension.');
 	}
 
 	protected function _set($key, $data, $ttl)
 	{
-		if (zend_shm_cache_store($this->key($key), $data, $ttl) === false)
-			throw new Exception('Unable to write Zend SHM cache: '.$key);
+		if (xcache_set($key, $data, $ttl) === false)
+			throw new \fluxbb\cache\Exception('Unable to write xcache cache: '.$key);
 	}
 
 	protected function _get($key)
 	{
-		$data = zend_shm_cache_fetch($this->key($key));
+		$data = xcache_get($key);
 		if ($data === null)
 			return self::NOT_FOUND;
 
@@ -67,11 +59,13 @@ class Flux_Cache_ZendSHM extends Flux_Cache
 
 	protected function _delete($key)
 	{
-		zend_shm_cache_delete($this->key($key));
+		xcache_unset($key);
 	}
 
 	public function clear()
 	{
-		zend_shm_cache_clear(self::NAMESPACE);
+		// Note: xcache_clear_cache() is an admin function! If you have
+		// xcache.admin.enable_auth = On in php.ini this will require HTTP auth!
+		xcache_clear_cache(XC_TYPE_VAR, 0);
 	}
 }

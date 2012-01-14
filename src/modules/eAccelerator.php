@@ -19,39 +19,51 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
 
 /**
- * The JSON filter serializes data into json string form.
- * This filter can be loaded by default as not all cache layers
- * support storing PHP objects.
- * http://uk2.php.net/manual/en/book.json.php
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
+ * The eAccelerator cache stores data using eAccelerator.
+ * http://eaccelerator.net
  */
 
-class Flux_Filter_JSON implements Flux_Serializer
-{
+namespace fluxbb\cache\modules;
 
+class eAccelerator extends \fluxbb\cache\Cache
+{
 	/**
-	* Initialise a new JSON filter.
+	* Initialise a new eAccelerator cache.
 	*/
 	public function __construct($config)
 	{
-
+		if (!extension_loaded('eaccelerator') || !function_exists('eaccelerator_put')) // Some reason the user cache functions aren't available in 0.9.6.x...
+			throw new \fluxbb\cache\Exception('The eAccelerator cache requires the eAccelerator extension with shared memory functions enabled.');
 	}
 
-	public function encode($data)
+	protected function _set($key, $data, $ttl)
 	{
-		return json_encode($data);
+		if (eaccelerator_put($key, $data, $ttl) === false)
+			throw new \fluxbb\cache\Exception('Unable to write eAccelerator cache: '.$key);
 	}
 
-	public function decode($data)
+	protected function _get($key)
 	{
-		return json_decode($data);
+		$data = eaccelerator_get($key);
+		if ($data === null)
+			return self::NOT_FOUND;
+
+		return $data;
+	}
+
+	protected function _delete($key)
+	{
+		eaccelerator_rm($key);
+	}
+
+	public function clear()
+	{
+		eaccelerator_clear();
 	}
 }

@@ -19,47 +19,41 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
 
 /**
- * The Zend Disk cache stores data using Zend disk.
- * http://files.zend.com/help/Zend-Platform/zend_cache_api.htm
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
+ * The Wincache cache stores data using the Windows Cache extension.
+ * http://uk2.php.net/manual/en/book.wincache.php
  */
 
-class Flux_Cache_ZendDisk extends Flux_Cache
-{
-	const NAMESPACE = 'php-cache';
+namespace fluxbb\cache\modules;
 
+class WinCache extends \fluxbb\cache\Cache
+{
 	/**
-	* Initialise a new Zend Disk cache.
+	* Initialise a new WinCache cache.
 	*/
 	public function __construct($config)
 	{
-		if (!extension_loaded('zendcache'))
-			throw new Exception('The Zend Disk cache requires the ZendCache extension.');
-	}
-
-	private function key($key)
-	{
-		return self::NAMESPACE.'::'.$key;
+		if (!extension_loaded('wincache'))
+			throw new \fluxbb\cache\Exception('The WinCache cache requires the WinCache extension.');
 	}
 
 	protected function _set($key, $data, $ttl)
 	{
-		if (zend_disk_cache_store($this->key($key), $data, $ttl) === false)
-			throw new Exception('Unable to write Zend Disk cache: '.$key);
+		if (wincache_ucache_set($key, $data, $ttl) === false)
+			throw new \fluxbb\cache\Exception('Unable to write wincache cache: '.$key);
 	}
 
 	protected function _get($key)
 	{
-		$data = zend_disk_cache_fetch($this->key($key));
-		if ($data === null)
+		$success = false;
+
+		$data = wincache_ucache_get($key, $success);
+		if ($success === false)
 			return self::NOT_FOUND;
 
 		return $data;
@@ -67,11 +61,11 @@ class Flux_Cache_ZendDisk extends Flux_Cache
 
 	protected function _delete($key)
 	{
-		zend_disk_cache_delete($this->key($key));
+		wincache_ucache_delete($key);
 	}
 
 	public function clear()
 	{
-		zend_disk_cache_clear(self::NAMESPACE);
+		wincache_ucache_clear();
 	}
 }

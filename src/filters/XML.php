@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
@@ -29,12 +29,11 @@
  * This filter can be loaded by default as not all cache layers
  * support storing PHP objects.
  * http://pear.php.net/package/XML_Serializer/
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Flux_Filter_XML implements Flux_Serializer
+namespace fluxbb\cache\filters;
+
+class XML implements \fluxbb\cache\Serializer
 {
 	private $serializer;
 	private $unserializer;
@@ -48,7 +47,7 @@ class Flux_Filter_XML implements Flux_Serializer
 		@include_once 'XML/Unserializer.php';
 
 		if (!class_exists('XML_Serializer') || !class_exists('XML_Unserializer'))
-			throw new Exception('The XML filter requires the Pear::XML_Serializer library.');
+			throw new \fluxbb\cache\Exception('The XML filter requires the Pear::XML_Serializer library.');
 
 		$this->serializer = new XML_Serializer(array(
 			XML_SERIALIZER_OPTION_TYPEHINTS		=> true,

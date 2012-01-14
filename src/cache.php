@@ -24,24 +24,26 @@
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
 
+namespace fluxbb\cache;
+
 if (!defined('PHPCACHE_ROOT'))
 	define('PHPCACHE_ROOT', dirname(__FILE__).'/');
 
-require PHPCACHE_ROOT.'Filter.php';
+require PHPCACHE_ROOT.'filter.php';
 
-abstract class Flux_Cache extends Flux_FilterUser
+abstract class Cache extends FilterUser
 {
-	const NOT_FOUND = 'Flux_Cache::NOT_FOUND';
+	const NOT_FOUND = 'Cache::NOT_FOUND';
 	const DEFAULT_SERIALIZER = 'Serialize';
 
 	public static final function load($type, $args = array(), $serializerType = false, $serializerArgs = array())
 	{
-		if (!class_exists('Flux_Cache_'.$type))
+		if (!class_exists('\\fluxbb\\cache\\modules\\'.$type))
 		{
-			if (!file_exists(PHPCACHE_ROOT.'Cache/'.$type.'.php'))
+			if (!file_exists(PHPCACHE_ROOT.'modules/'.$type.'.php'))
 				throw new Exception('Cache type "'.$type.'" does not exist.');
 
-			require PHPCACHE_ROOT.'Cache/'.$type.'.php';
+			require PHPCACHE_ROOT.'modules/'.$type.'.php';
 		}
 
 		if ($serializerType === false)
@@ -51,7 +53,7 @@ abstract class Flux_Cache extends Flux_FilterUser
 		}
 
 		// Instantiate the cache
-		$type = 'Flux_Cache_'.$type;
+		$type = '\\fluxbb\\cache\\modules\\'.$type;
 		$cache = new $type($args);
 
 		// If we have a prefix defined, set it
@@ -103,4 +105,12 @@ abstract class Flux_Cache extends Flux_FilterUser
 	protected abstract function _delete($key);
 
 	public abstract function clear();
+}
+
+class Exception extends \Exception {
+	
+	public function __construct($msg)
+	{
+		parent::__construct($msg);
+	}
 }

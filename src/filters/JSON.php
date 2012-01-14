@@ -19,25 +19,24 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
 
 /**
- * The var_export filter serializes data into PHP code.
+ * The JSON filter serializes data into json string form.
  * This filter can be loaded by default as not all cache layers
  * support storing PHP objects.
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
+ * http://uk2.php.net/manual/en/book.json.php
  */
 
-class Flux_Filter_VarExport implements Flux_Serializer
-{
+namespace fluxbb\cache\filters;
 
+class JSON implements \fluxbb\cache\Serializer
+{
 	/**
-	* Initialise a new VarExport filter.
+	* Initialise a new JSON filter.
 	*/
 	public function __construct($config)
 	{
@@ -46,11 +45,11 @@ class Flux_Filter_VarExport implements Flux_Serializer
 
 	public function encode($data)
 	{
-		return 'return '.var_export($data, true).';';
+		return json_encode($data);
 	}
 
 	public function decode($data)
 	{
-		return eval($data);
+		return json_decode($data);
 	}
 }

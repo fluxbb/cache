@@ -19,40 +19,38 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
 
 /**
- * The YAML filter serializes data into YAML string form.
- * This filter can be loaded by default as not all cache layers
- * support storing PHP objects.
- * http://uk2.php.net/manual/en/book.yaml.php
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
+ * The LZF filter compresses data using LZF.
+ * http://uk2.php.net/manual/en/book.lzf.php
  */
 
-class Flux_Filter_YAML implements Flux_Serializer
+namespace fluxbb\cache\filters;
+
+class LZF implements \fluxbb\cache\Filter
 {
+	private $level;
 
 	/**
-	* Initialise a new YAML filter.
+	* Initialise a new LZF filter.
 	*/
 	public function __construct($config)
 	{
-		if (!extension_loaded('yaml'))
-			throw new Exception('The YAML filter requires the YAML extension.');
+		if (!extension_loaded('lzf'))
+			throw new \fluxbb\cache\Exception('The ZLF filter requires the ZLF extension.');
 	}
 
 	public function encode($data)
 	{
-		return yaml_emit($data, YAML_UTF8_ENCODING, YAML_LN_BREAK);
+		return lzf_compress($data);
 	}
 
 	public function decode($data)
 	{
-		return yaml_parse($data);
+		return lzf_decompress($data);
 	}
 }

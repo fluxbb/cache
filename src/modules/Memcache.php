@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
@@ -27,12 +27,11 @@
 /**
  * The Memcache cache stores data using the Memcache extension for Memcached.
  * http://uk2.php.net/manual/en/book.memcache.php
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Flux_Cache_Memcache extends Flux_Cache
+namespace fluxbb\cache\modules;
+
+class Memcache extends \fluxbb\cache\Cache
 {
 	const DEFAULT_HOST = 'localhost';
 	const DEFAULT_PORT = 11211;
@@ -50,7 +49,7 @@ class Flux_Cache_Memcache extends Flux_Cache
 	public function __construct($config)
 	{
 		if (!extension_loaded('memcache'))
-			throw new Exception('The Memcache cache requires the Memcache extension.');
+			throw new \fluxbb\cache\Exception('The Memcache cache requires the Memcache extension.');
 
 		// If we were given a Memcache instance use that
 		if (isset($config['instance']))
@@ -62,7 +61,7 @@ class Flux_Cache_Memcache extends Flux_Cache
 
 			$this->memcache = new Memcache();
 			if (@$this->memcache->connect($host, $port) === false)
-				throw new Exception('Unable to connect to memcached server: '.$host.':'.$port);
+				throw new \fluxbb\cache\Exception('Unable to connect to memcached server: '.$host.':'.$port);
 		}
 	}
 
@@ -75,7 +74,7 @@ class Flux_Cache_Memcache extends Flux_Cache
 			$ttl = time() + $ttl;
 
 		if ($this->memcache->set($key, $data, 0, $ttl) === false)
-			throw new Exception('Unable to write memcache cache: '.$key);
+			throw new \fluxbb\cache\Exception('Unable to write memcache cache: '.$key);
 	}
 
 	protected function _get($key)

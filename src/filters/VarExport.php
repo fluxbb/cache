@@ -19,54 +19,36 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
 
 /**
- * The XCache cache stores data using XCache.
- * http://xcache.lighttpd.net
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
+ * The var_export filter serializes data into PHP code.
+ * This filter can be loaded by default as not all cache layers
+ * support storing PHP objects.
  */
 
-class Flux_Cache_XCache extends Flux_Cache
+namespace fluxbb\cache\filters;
+
+class VarExport implements \fluxbb\cache\Serializer
 {
 	/**
-	* Initialise a new XCache cache.
+	* Initialise a new VarExport filter.
 	*/
 	public function __construct($config)
 	{
-		if (!extension_loaded('xcache'))
-			throw new Exception('The XCache cache requires the XCache extension.');
+
 	}
 
-	protected function _set($key, $data, $ttl)
+	public function encode($data)
 	{
-		if (xcache_set($key, $data, $ttl) === false)
-			throw new Exception('Unable to write xcache cache: '.$key);
+		return 'return '.var_export($data, true).';';
 	}
 
-	protected function _get($key)
+	public function decode($data)
 	{
-		$data = xcache_get($key);
-		if ($data === null)
-			return self::NOT_FOUND;
-
-		return $data;
-	}
-
-	protected function _delete($key)
-	{
-		xcache_unset($key);
-	}
-
-	public function clear()
-	{
-		// Note: xcache_clear_cache() is an admin function! If you have
-		// xcache.admin.enable_auth = On in php.ini this will require HTTP auth!
-		xcache_clear_cache(XC_TYPE_VAR, 0);
+		return eval($data);
 	}
 }

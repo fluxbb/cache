@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
@@ -27,12 +27,11 @@
 /**
  * The Redis cache stores data using Redis via the phpredis extension.
  * http://github.com/owlient/phpredis
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Flux_Cache_Redis extends Flux_Cache
+namespace fluxbb\cache\modules;
+
+class Redis extends \fluxbb\cache\Cache
 {
 	const DEFAULT_HOST = 'localhost';
 	const DEFAULT_PORT = 6379;
@@ -51,7 +50,7 @@ class Flux_Cache_Redis extends Flux_Cache
 	public function __construct($config)
 	{
 		if (!extension_loaded('redis'))
-			throw new Exception('The Redis cache requires the Redis extension.');
+			throw new \fluxbb\cache\Exception('The Redis cache requires the Redis extension.');
 
 		// If we were given a Redis instance use that
 		if (isset($config['instance']))
@@ -63,7 +62,7 @@ class Flux_Cache_Redis extends Flux_Cache
 
 			$this->redis = new Redis();
 			if (@$this->redis->connect($host, $port) === false)
-				throw new Exception('Unable to connect to redis server: '.$host.':'.$port);
+				throw new \fluxbb\cache\Exception('Unable to connect to redis server: '.$host.':'.$port);
 
 			if (isset($config['password']))
 				$this->redis->auth($config['password']);
@@ -73,10 +72,10 @@ class Flux_Cache_Redis extends Flux_Cache
 	protected function _set($key, $data, $ttl)
 	{
 		if ($this->redis->set($key, $data) === false)
-			throw new Exception('Unable to write redis cache: '.$key);
+			throw new \fluxbb\cache\Exception('Unable to write redis cache: '.$key);
 
 		if ($ttl > 0 && $this->redis->expire($key, $ttl) === false)
-			throw new Exception('Unable to set TTL on cache: '.$key);
+			throw new \fluxbb\cache\Exception('Unable to set TTL on cache: '.$key);
 	}
 
 	protected function _get($key)

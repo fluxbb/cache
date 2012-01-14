@@ -20,37 +20,25 @@
  *
  * @category	FluxBB
  * @package		Flux_Cache
+ * @subpackage	Tests
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
 
-/**
- * The Serialize filter serializes data into string form.
- * This filter can be loaded by default as not all cache layers
- * support storing PHP objects.
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
- */
+namespace fluxbb\cache\tests;
 
-class Flux_Filter_Serialize implements Flux_Serializer
+require_once dirname(__FILE__).'/../cache.php';
+
+class FileTest extends CacheTest
 {
-
-	/**
-	* Initialise a new Serialize filter.
-	*/
-	public function __construct($config)
+	public static function setUpBeforeClass()
 	{
-
+		self::$cache = \fluxbb\cache\Cache::load('File', array('dir' => '/tmp/fluxbb-cache'));
 	}
 
-	public function encode($data)
+	public static function tearDownAfterClass()
 	{
-		return serialize($data);
-	}
-
-	public function decode($data)
-	{
-		return unserialize($data);
+		self::$cache->clear();
+		self::$cache = null;
 	}
 }

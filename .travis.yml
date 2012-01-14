@@ -8,7 +8,7 @@ php:
   - 5.3
 
 before_script:
-  - "sh install_xcache.sh"
+  - "sh tests/install_xcache.sh"
 
 script: phpunit tests/
 

@@ -25,44 +25,20 @@
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
 
-define('PHPCACHE_ROOT', realpath(dirname(__FILE__).'/../').'/src/');
-require PHPCACHE_ROOT.'Cache.php';
+namespace fluxbb\cache\tests;
 
-abstract class Flux_CacheTest extends PHPUnit_Framework_TestCase
+require_once dirname(__FILE__).'/../cache.php';
+
+class XCacheTest extends CacheTest
 {
-	protected static $cache;
-
-	/**
-	 * @dataProvider provider
-	 */
-	public function testGetSet($key, $value)
+	public static function setUpBeforeClass()
 	{
-		self::$cache->set($key, $value);
-
-		$result = self::$cache->get($key);
-		$this->assertEquals($result, $value);
+		self::$cache = \fluxbb\cache\Cache::load('XCache');
 	}
 
-	public function testDelete()
+	public static function tearDownAfterClass()
 	{
-		$key = 'test';
-
-		self::$cache->set($key, time());
-		self::$cache->delete($key);
-
-		$result = self::$cache->get($key);
-		$this->assertEquals($result, Flux_Cache::NOT_FOUND);
-	}
-
-	public function provider()
-	{
-		return array(
-			array('int', time()),
-			array('string', 'hello world'),
-			array('bool', true),
-			array('null', null),
-			array('array', array(0 => 'zero', 1 => 'one', 7 => 'seven')),
-			array('object', new DOMComment('hello world')),
-		);
+		self::$cache->clear();
+		self::$cache = null;
 	}
 }

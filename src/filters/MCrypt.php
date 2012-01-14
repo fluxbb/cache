@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
@@ -27,12 +27,11 @@
 /**
  * The MCrypt filter encrypts data using the given cipher and secret key.
  * http://uk2.php.net/manual/en/book.mcrypt.php
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Flux_Filter_MCrypt implements Flux_Filter
+namespace fluxbb\cache\filters;
+
+class MCrypt implements \fluxbb\cache\Filter
 {
 	const DEFAULT_CIPHER = MCRYPT_RIJNDAEL_128;
 	const DEFAULT_MODE = MCRYPT_MODE_ECB;
@@ -52,10 +51,10 @@ class Flux_Filter_MCrypt implements Flux_Filter
 	public function __construct($config)
 	{
 		if (!extension_loaded('mcrypt'))
-			throw new Exception('The MCrypt filter requires the MCrypt extension.');
+			throw new \fluxbb\cache\Exception('The MCrypt filter requires the MCrypt extension.');
 
 		if (!isset($config['secret']))
-			throw new Exception('A secret is required to encrypt data.');
+			throw new \fluxbb\cache\Exception('A secret is required to encrypt data.');
 
 		$this->key = md5($config['secret']);
 		$this->cipher = isset($config['cipher']) ? $config['cipher'] : self::DEFAULT_CIPHER;

@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
@@ -27,11 +27,11 @@
 /**
  * The APC cache stores data using APC.
  * http://uk2.php.net/manual/en/book.apc.php
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
-class Flux_Cache_APC extends Flux_Cache
+
+namespace fluxbb\cache\modules;
+
+class APC extends \fluxbb\cache\Cache
 {
 	/**
 	* Initialise a new APC cache.
@@ -39,7 +39,7 @@ class Flux_Cache_APC extends Flux_Cache
 	public function __construct($config)
 	{
 		if (!extension_loaded('apc'))
-			throw new Exception('The APC cache requires the APC extension.');
+			throw new \fluxbb\cache\Exception('The APC cache requires the APC extension.');
 	}
 
 	// Since we are emulating the TTL we need to override set()
@@ -54,7 +54,7 @@ class Flux_Cache_APC extends Flux_Cache
 	protected function _set($key, $data, $ttl)
 	{
 		if (apc_store($key, $data, $ttl) === false)
-			throw new Exception('Unable to write APC cache: '.$key);
+			throw new \fluxbb\cache\Exception('Unable to write APC cache: '.$key);
 	}
 
 	// Since we are emulating the TTL we need to override get()

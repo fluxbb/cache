@@ -19,7 +19,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
@@ -27,12 +27,11 @@
 /**
  * The GZip filter compresses data using GZip.
  * http://uk2.php.net/manual/en/book.zlib.php
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
  */
 
-class Flux_Filter_GZip implements Flux_Filter
+namespace fluxbb\cache\filters;
+
+class GZip implements \fluxbb\cache\Filter
 {
 	const DEFAULT_LEVEL = 4;
 
@@ -46,7 +45,7 @@ class Flux_Filter_GZip implements Flux_Filter
 	public function __construct($config)
 	{
 		if (!extension_loaded('zlib'))
-			throw new Exception('The GZip filter requires the Zlib extension.');
+			throw new \fluxbb\cache\Exception('The GZip filter requires the Zlib extension.');
 
 		$this->level = isset($config['level']) ? $config['level'] : self::DEFAULT_LEVEL;
 	}

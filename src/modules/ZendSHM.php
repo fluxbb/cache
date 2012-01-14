@@ -19,39 +19,45 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  *
  * @category	FluxBB
- * @package		Flux_Cache
+ * @package		Cache
  * @copyright	Copyright (c) 2011 FluxBB (http://fluxbb.org)
  * @license		http://www.gnu.org/licenses/lgpl.html	GNU Lesser General Public License
  */
 
 /**
- * The eAccelerator cache stores data using eAccelerator.
- * http://eaccelerator.net
- *
- * Copyright (C) 2011 FluxBB (http://fluxbb.org)
- * License: LGPL - GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html)
+ * The Zend SHM cache stores data using Zend shared memory.
+ * http://files.zend.com/help/Zend-Platform/zend_cache_api.htm
  */
 
-class Flux_Cache_eAccelerator extends Flux_Cache
+namespace fluxbb\cache\modules;
+
+class ZendSHM extends \fluxbb\cache\Cache
 {
+	const ZEND_NAMESPACE = 'php-cache';
+
 	/**
-	* Initialise a new eAccelerator cache.
+	* Initialise a new Zend SHM cache.
 	*/
 	public function __construct($config)
 	{
-		if (!extension_loaded('eaccelerator') || !function_exists('eaccelerator_put')) // Some reason the user cache functions aren't available in 0.9.6.x...
-			throw new Exception('The eAccelerator cache requires the eAccelerator extension with shared memory functions enabled.');
+		if (!extension_loaded('zendcache'))
+			throw new \fluxbb\cache\Exception('The Zend SHM cache requires the ZendCache extension.');
+	}
+
+	private function key($key)
+	{
+		return self::ZEND_NAMESPACE.'::'.$key;
 	}
 
 	protected function _set($key, $data, $ttl)
 	{
-		if (eaccelerator_put($key, $data, $ttl) === false)
-			throw new Exception('Unable to write eAccelerator cache: '.$key);
+		if (zend_shm_cache_store($this->key($key), $data, $ttl) === false)
+			throw new \fluxbb\cache\Exception('Unable to write Zend SHM cache: '.$key);
 	}
 
 	protected function _get($key)
 	{
-		$data = eaccelerator_get($key);
+		$data = zend_shm_cache_fetch($this->key($key));
 		if ($data === null)
 			return self::NOT_FOUND;
 
@@ -60,11 +66,11 @@ class Flux_Cache_eAccelerator extends Flux_Cache
 
 	protected function _delete($key)
 	{
-		eaccelerator_rm($key);
+		zend_shm_cache_delete($this->key($key));
 	}
 
 	public function clear()
 	{
-		eaccelerator_clear();
+		zend_shm_cache_clear(self::ZEND_NAMESPACE);
 	}
 }
