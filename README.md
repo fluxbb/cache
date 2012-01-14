@@ -31,7 +31,7 @@ License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/
  * [MCrypt](http://uk2.php.net/manual/en/book.mcrypt.php)
 
 ## API
-	Flux_Cache::load($type, $args = array(), $serializer_type = false, $serializer_args = array());
+	\fluxbb\cache\Cache::load($type, $args = array(), $serializer_type = false, $serializer_args = array());
 
 	$cache->set($key, $data, $ttl = 0);
 	$cache->get($key);
@@ -44,7 +44,7 @@ License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/
 
 ## Example usage
 	// We want a file-based cache in the /tmp/php-cache/ dir - this will be created if possible. Obviously this path wont work on Windows!
-	$cache = Flux_Cache::load('File', array('dir' => '/tmp/php-cache/'));
+	$cache = \fluxbb\cache\Cache::load('File', array('dir' => '/tmp/php-cache/'));
 
 	// If we have the mcrypt extension lets encrypt the cache
 	if (extension_loaded('mcrypt'))
@@ -55,7 +55,7 @@ License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/
 
 	// Check if there is already a value cached
 	$value = $cache->get('test');
-	echo ($value === Flux_Cache::NOT_FOUND ? 'Value not found in cache.' : 'Value: '.$value)."\n";
+	echo ($value === \fluxbb\cache\Cache::NOT_FOUND ? 'Value not found in cache.' : 'Value: '.$value)."\n";
 
 	// Store a new unique ID in the cache
 	$uniqid = uniqid();
@@ -65,7 +65,7 @@ License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/
 
 	// Check that the new value was stored correctly
 	$value = $cache->get('test');
-	echo ($value === Flux_Cache::NOT_FOUND ? 'Value not found in cache.' : 'Value: '.$value)."\n";
+	echo ($value === \fluxbb\cache\Cache::NOT_FOUND ? 'Value not found in cache.' : 'Value: '.$value)."\n";
 
 ## Example output
 	Adding mcrypt filter.
