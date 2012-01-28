@@ -30,7 +30,7 @@ namespace fluxbb\cache\tests;
 define('PHPCACHE_ROOT', realpath(dirname(__FILE__).'/../').'/src/');
 require PHPCACHE_ROOT.'cache.php';
 
-abstract class CacheTest extends PHPUnit_Framework_TestCase
+abstract class CacheTest extends \PHPUnit_Framework_TestCase
 {
 	protected static $cache;
 
@@ -64,7 +64,7 @@ abstract class CacheTest extends PHPUnit_Framework_TestCase
 			array('bool', true),
 			array('null', null),
 			array('array', array(0 => 'zero', 1 => 'one', 7 => 'seven')),
-			array('object', new DOMComment('hello world')),
+			array('object', new \DOMComment('hello world')),
 		);
 	}
 }
