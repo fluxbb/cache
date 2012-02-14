@@ -75,7 +75,7 @@ class Memcached extends \fluxbb\cache\Cache
 			$ttl = time() + $ttl;
 
 		if ($this->memcached->set($key, $data, $ttl) === false)
-			throw new \fluxbb\cache\Exception('Unable to write memcached cache: '.$key);
+			throw new \fluxbb\cache\Exception('Unable to write memcached cache: '.$key.'. Error code: '.$this->memcached->getResultCode());
 	}
 
 	protected function _get($key)
