@@ -54,7 +54,7 @@ class APC extends \fluxbb\cache\Cache
 
 	protected function _set($key, $data, $ttl)
 	{
-		if (apc_store($key, $data, $ttl) === false)
+		if (\apc_store($key, $data, $ttl) === false)
 			throw new \fluxbb\cache\Exception('Unable to write APC cache: '.$key);
 	}
 
@@ -82,7 +82,7 @@ class APC extends \fluxbb\cache\Cache
 
 	protected function _get($key)
 	{
-		$data = apc_fetch($key);
+		$data = \apc_fetch($key);
 		if ($data === false)
 			return self::NOT_FOUND;
 
@@ -91,11 +91,11 @@ class APC extends \fluxbb\cache\Cache
 
 	protected function _delete($key)
 	{
-		apc_delete($key);
+		\apc_delete($key);
 	}
 
 	public function clear()
 	{
-		apc_clear_cache('user');
+		\apc_clear_cache('user');
 	}
 }
