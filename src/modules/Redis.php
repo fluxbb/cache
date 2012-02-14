@@ -61,7 +61,7 @@ class Redis extends \fluxbb\cache\Cache
 			$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;
 			$port = isset($config['port']) ? $config['port'] : self::DEFAULT_PORT;
 
-			$this->redis = new Redis();
+			$this->redis = new \Redis();
 			if (@$this->redis->connect($host, $port) === false)
 				throw new \fluxbb\cache\Exception('Unable to connect to redis server: '.$host.':'.$port);
 
