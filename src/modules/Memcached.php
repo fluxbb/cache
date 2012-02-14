@@ -60,7 +60,7 @@ class Memcached extends \fluxbb\cache\Cache
 			$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;
 			$port = isset($config['port']) ? $config['port'] : self::DEFAULT_PORT;
 
-			$this->memcached = new Memcached();
+			$this->memcached = new \Memcached();
 			if (@$this->memcached->addServer($host, $port) === false)
 				throw new \fluxbb\cache\Exception('Unable to connect to memcached server: '.$host.':'.$port);
 		}
