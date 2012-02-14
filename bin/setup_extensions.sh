@@ -21,7 +21,7 @@ echo "apc.enabled=1" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:
 echo "apc.enable_cli=1" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
 
 # Install Redis bindings
-wget https://github.com/nicolasff/phpredis/tarball/master -O phpredis.tgz
-tar -xzf phpredis.tgz
+wget https://github.com/downloads/nicolasff/phpredis/php_redis-5.3-vc9-ts-73d99c3e.zip -O phpredis.zip
+unzip phpredis.zip
 sh -c "cd phpredis && phpize && ./configure && make && sudo make install"
 echo "extension=redis.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
