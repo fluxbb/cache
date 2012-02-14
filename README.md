@@ -13,7 +13,7 @@ License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/
  * [eAccelerator](http://eaccelerator.net)
  * [Memcache](http://uk2.php.net/manual/en/book.memcache.php)
  * [Memcached](http://uk2.php.net/manual/en/book.memcached.php)
- * [Redis](http://github.com/owlient/phpredis)
+ * [Redis](https://github.com/nicolasff/phpredis)
 
 ## Available serializers
  * [PHP-serialize](http://uk2.php.net/manual/en/function.serialize.php)
