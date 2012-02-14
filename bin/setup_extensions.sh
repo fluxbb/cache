@@ -9,5 +9,5 @@ echo "extension=memcache.so" >> `php --ini | grep "Loaded Configuration" | sed -
 # Install Memcached
 wget http://pecl.php.net/get/memcached-1.0.2.tgz
 tar -xzf memcached-1.0.2.tgz
-sh -c "cd memcache-1.0.2 && phpize && ./configure && make && sudo make install"
+sh -c "cd memcached-1.0.2 && phpize && ./configure && make && sudo make install"
 echo "extension=memcached.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
