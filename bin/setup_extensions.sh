@@ -19,3 +19,9 @@ sh -c "cd APC-3.1.9 && phpize && ./configure && make && sudo make install"
 echo "extension=apc.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
 echo "apc.enabled=1" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
 echo "apc.enable_cli=1" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+
+# Install Redis bindings
+wget https://github.com/nicolasff/phpredis/tarball/master -O phpredis.tgz
+tar -xzf phpredis.tgz
+sh -c "cd phpredis && phpize && ./configure && make && sudo make install"
+echo "extension=redis.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
