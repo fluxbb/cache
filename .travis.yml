@@ -10,7 +10,7 @@ php:
 before_script:
   - "sh bin/setup_extensions.sh"
 
-script: "phpunit tests/ || cat /var/log/memcached.log"
+script: ./bin/run_tests.sh
 
 notifications:
   irc:
