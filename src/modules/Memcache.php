@@ -50,11 +50,15 @@ class Memcache extends \fluxbb\cache\Cache
 	public function __construct($config)
 	{
 		if (!extension_loaded('memcache'))
+		{
 			throw new \fluxbb\cache\Exception('The Memcache cache requires the Memcache extension.');
+		}
 
 		// If we were given a Memcache instance use that
 		if (isset($config['instance']))
+		{
 			$this->memcache = $config['instance'];
+		}
 		else
 		{
 			$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;
@@ -62,7 +66,9 @@ class Memcache extends \fluxbb\cache\Cache
 
 			$this->memcache = new \Memcache();
 			if (@$this->memcache->connect($host, $port) === false)
+			{
 				throw new \fluxbb\cache\Exception('Unable to connect to memcached server: '.$host.':'.$port);
+			}
 		}
 	}
 
@@ -72,17 +78,23 @@ class Memcache extends \fluxbb\cache\Cache
 		// Memcache assumes it to be an expire time. Since we always expect TTL in number of seconds
 		// convert it correctly if needed to stop Memcache wrongly assuming its an expire time.
 		if ($ttl > 2592000)
+		{
 			$ttl = time() + $ttl;
+		}
 
 		if ($this->memcache->set($key, $data, 0, $ttl) === false)
+		{
 			throw new \fluxbb\cache\Exception('Unable to write memcache cache: '.$key);
+		}
 	}
 
 	protected function _get($key)
 	{
 		$data = $this->memcache->get($key);
 		if ($data === false)
+		{
 			return self::NOT_FOUND;
+		}
 
 		return $data;
 	}

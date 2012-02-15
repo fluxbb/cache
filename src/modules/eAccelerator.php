@@ -39,21 +39,27 @@ class eAccelerator extends \fluxbb\cache\Cache
 	*/
 	public function __construct($config)
 	{
-		if (!extension_loaded('eaccelerator') || !function_exists('eaccelerator_put')) // Some reason the user cache functions aren't available in 0.9.6.x...
+		if (!extension_loaded('eaccelerator') || !function_exists('eaccelerator_put')) // For some reason the user cache functions aren't available in 0.9.6.x...
+		{
 			throw new \fluxbb\cache\Exception('The eAccelerator cache requires the eAccelerator extension with shared memory functions enabled.');
+		}
 	}
 
 	protected function _set($key, $data, $ttl)
 	{
 		if (eaccelerator_put($key, $data, $ttl) === false)
+		{
 			throw new \fluxbb\cache\Exception('Unable to write eAccelerator cache: '.$key);
+		}
 	}
 
 	protected function _get($key)
 	{
 		$data = eaccelerator_get($key);
 		if ($data === null)
+		{
 			return self::NOT_FOUND;
+		}
 
 		return $data;
 	}

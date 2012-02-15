@@ -40,7 +40,9 @@ class APC extends \fluxbb\cache\Cache
 	public function __construct($config)
 	{
 		if (!extension_loaded('apc'))
+		{
 			throw new \fluxbb\cache\Exception('The APC cache requires the APC extension.');
+		}
 	}
 
 	// Since we are emulating the TTL we need to override set()
@@ -54,8 +56,10 @@ class APC extends \fluxbb\cache\Cache
 
 	protected function _set($key, $data, $ttl)
 	{
-		if (\apc_store($key, $data, $ttl) === false)
+		if (apc_store($key, $data, $ttl) === false)
+		{
 			throw new \fluxbb\cache\Exception('Unable to write APC cache: '.$key);
+		}
 	}
 
 	// Since we are emulating the TTL we need to override get()
@@ -63,7 +67,9 @@ class APC extends \fluxbb\cache\Cache
 	{
 		$data = parent::get($key);
 		if ($data === self::NOT_FOUND)
+		{
 			return self::NOT_FOUND;
+		}
 
 		// Check if the data has expired
 		if ($data['expire'] > 0 && $data['expire'] < time())
@@ -82,20 +88,22 @@ class APC extends \fluxbb\cache\Cache
 
 	protected function _get($key)
 	{
-		$data = \apc_fetch($key);
+		$data = apc_fetch($key);
 		if ($data === false)
+		{
 			return self::NOT_FOUND;
+		}
 
 		return $data;
 	}
 
 	protected function _delete($key)
 	{
-		\apc_delete($key);
+		apc_delete($key);
 	}
 
 	public function clear()
 	{
-		\apc_clear_cache('user');
+		apc_clear_cache('user');
 	}
 }

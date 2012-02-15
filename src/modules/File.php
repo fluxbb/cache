@@ -48,7 +48,9 @@ class File extends \fluxbb\cache\Cache
 	{
 		$this->dir = $config['dir'];
 		if ((!is_dir($this->dir) && !@mkdir($this->dir, 0777, true)) || !is_writable($this->dir))
+		{
 			throw new \fluxbb\cache\Exception('Unable to write to cache dir: '.$this->dir);
+		}
 
 		$this->suffix = isset($config['suffix']) ? $config['suffix'] : self::DEFAULT_SUFFIX;
 	}
@@ -70,7 +72,9 @@ class File extends \fluxbb\cache\Cache
 	protected function _set($key, $data, $ttl)
 	{
 		if (@file_put_contents($this->dir.$this->key($key).$this->suffix, $data) === false)
+		{
 			throw new \fluxbb\cache\Exception('Unable to write file cache: '.$key);
+		}
 	}
 
 	// Since we are emulating the TTL we need to override get()
@@ -78,7 +82,9 @@ class File extends \fluxbb\cache\Cache
 	{
 		$data = parent::get($key);
 		if ($data === self::NOT_FOUND)
+		{
 			return self::NOT_FOUND;
+		}
 
 		// Check if the data has expired
 		if ($data['expire'] > 0 && $data['expire'] < time())
@@ -99,7 +105,9 @@ class File extends \fluxbb\cache\Cache
 	{
 		$data = @file_get_contents($this->dir.$this->key($key).$this->suffix);
 		if ($data === false)
+		{
 			return self::NOT_FOUND;
+		}
 
 		return $data;
 	}
@@ -110,13 +118,17 @@ class File extends \fluxbb\cache\Cache
 
 		// Incase we are using APC with apc.stat=0
 		if (function_exists('apc_delete_file'))
+		{
 			@apc_delete_file($this->dir.$this->key($key).$this->suffix);
+		}
 	}
 
 	public function clear()
 	{
 		$files = glob($this->dir.'*'.$this->suffix);
 		foreach ($files as $file)
+		{
 			@unlink($file);
+		}
 	}
 }

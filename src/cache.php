@@ -41,7 +41,9 @@ abstract class Cache extends FilterUser
 		if (!class_exists('\\fluxbb\\cache\\modules\\'.$type))
 		{
 			if (!file_exists(PHPCACHE_ROOT.'modules/'.$type.'.php'))
+			{
 				throw new Exception('Cache type "'.$type.'" does not exist.');
+			}
 
 			require PHPCACHE_ROOT.'modules/'.$type.'.php';
 		}
@@ -58,7 +60,9 @@ abstract class Cache extends FilterUser
 
 		// If we have a prefix defined, set it
 		if (isset($args['prefix']))
+		{
 			$cache->prefix = $args['prefix'];
+		}
 
 		// Add a serialize filter by default as not all caches can handle storing PHP objects
 		$cache->addFilter($serializerType, $serializerArgs);

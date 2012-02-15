@@ -47,7 +47,9 @@ class BZip2 implements \fluxbb\cache\Filter
 	public function __construct($config)
 	{
 		if (!extension_loaded('bz2'))
+		{
 			throw new \fluxbb\cache\Exception('The BZip2 filter requires the bz2 extension.');
+		}
 
 		$this->level = isset($config['level']) ? $config['level'] : self::DEFAULT_LEVEL;
 	}

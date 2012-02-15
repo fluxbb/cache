@@ -50,11 +50,15 @@ class Memcached extends \fluxbb\cache\Cache
 	public function __construct($config)
 	{
 		if (!extension_loaded('memcached'))
+		{
 			throw new \fluxbb\cache\Exception('The Memcached cache requires the Memcached extension.');
+		}
 
 		// If we were given a Memcached instance use that
 		if (isset($config['instance']))
+		{
 			$this->memcached = $config['instance'];
+		}
 		else
 		{
 			$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;
@@ -62,7 +66,9 @@ class Memcached extends \fluxbb\cache\Cache
 
 			$this->memcached = new \Memcached();
 			if (@$this->memcached->addServer($host, $port) === false)
+			{
 				throw new \fluxbb\cache\Exception('Unable to connect to memcached server: '.$host.':'.$port);
+			}
 		}
 	}
 
@@ -72,17 +78,23 @@ class Memcached extends \fluxbb\cache\Cache
 		// Memcached assumes it to be an expire time. Since we always expect TTL in number of seconds
 		// convert it correctly if needed to stop Memcached wrongly assuming its an expire time.
 		if ($ttl > 2592000)
+		{
 			$ttl = time() + $ttl;
+		}
 
 		if ($this->memcached->set($key, $data, $ttl) === false)
+		{
 			throw new \fluxbb\cache\Exception('Unable to write memcached cache: '.$key.'. Error code: '.$this->memcached->getResultCode());
+		}
 	}
 
 	protected function _get($key)
 	{
 		$data = $this->memcached->get($key);
 		if ($this->memcached->getResultCode() != 0)
+		{
 			return self::NOT_FOUND;
+		}
 
 		return $data;
 	}

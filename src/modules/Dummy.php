@@ -62,7 +62,9 @@ class Dummy extends \fluxbb\cache\Cache
 	{
 		$data = parent::get($key);
 		if ($data === self::NOT_FOUND)
+		{
 			return self::NOT_FOUND;
+		}
 
 		// Check if the data has expired
 		if ($data['expire'] > 0 && $data['expire'] < time())
@@ -82,14 +84,16 @@ class Dummy extends \fluxbb\cache\Cache
 	protected function _get($key)
 	{
 		if (!isset($this->data[$key]))
+		{
 			return self::NOT_FOUND;
+		}
 
 		return $this->data[$key];
 	}
 
 	protected function _delete($key)
 	{
-		unset ($this->data[$key]);
+		unset($this->data[$key]);
 	}
 
 	public function clear()

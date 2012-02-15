@@ -42,7 +42,9 @@ class ZendSHM extends \fluxbb\cache\Cache
 	public function __construct($config)
 	{
 		if (!extension_loaded('zendcache'))
+		{
 			throw new \fluxbb\cache\Exception('The Zend SHM cache requires the ZendCache extension.');
+		}
 	}
 
 	private function key($key)
@@ -53,14 +55,18 @@ class ZendSHM extends \fluxbb\cache\Cache
 	protected function _set($key, $data, $ttl)
 	{
 		if (zend_shm_cache_store($this->key($key), $data, $ttl) === false)
+		{
 			throw new \fluxbb\cache\Exception('Unable to write Zend SHM cache: '.$key);
+		}
 	}
 
 	protected function _get($key)
 	{
 		$data = zend_shm_cache_fetch($this->key($key));
 		if ($data === null)
+		{
 			return self::NOT_FOUND;
+		}
 
 		return $data;
 	}

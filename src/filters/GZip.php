@@ -46,7 +46,9 @@ class GZip implements \fluxbb\cache\Filter
 	public function __construct($config)
 	{
 		if (!extension_loaded('zlib'))
+		{
 			throw new \fluxbb\cache\Exception('The GZip filter requires the Zlib extension.');
+		}
 
 		$this->level = isset($config['level']) ? $config['level'] : self::DEFAULT_LEVEL;
 	}

@@ -51,11 +51,15 @@ class Redis extends \fluxbb\cache\Cache
 	public function __construct($config)
 	{
 		if (!extension_loaded('redis'))
+		{
 			throw new \fluxbb\cache\Exception('The Redis cache requires the Redis extension.');
+		}
 
 		// If we were given a Redis instance use that
 		if (isset($config['instance']))
+		{
 			$this->redis = $config['instance'];
+		}
 		else
 		{
 			$host = isset($config['host']) ? $config['host'] : self::DEFAULT_HOST;
@@ -63,27 +67,37 @@ class Redis extends \fluxbb\cache\Cache
 
 			$this->redis = new \Redis();
 			if (@$this->redis->connect($host, $port) === false)
+			{
 				throw new \fluxbb\cache\Exception('Unable to connect to redis server: '.$host.':'.$port);
+			}
 
 			if (isset($config['password']))
+			{
 				$this->redis->auth($config['password']);
+			}
 		}
 	}
 
 	protected function _set($key, $data, $ttl)
 	{
 		if ($this->redis->set($key, $data) === false)
+		{
 			throw new \fluxbb\cache\Exception('Unable to write redis cache: '.$key);
+		}
 
 		if ($ttl > 0 && $this->redis->expire($key, $ttl) === false)
+		{
 			throw new \fluxbb\cache\Exception('Unable to set TTL on cache: '.$key);
+		}
 	}
 
 	protected function _get($key)
 	{
 		$data = $this->redis->get($key);
 		if ($data === false)
+		{
 			return self::NOT_FOUND;
+		}
 
 		return $data;
 	}

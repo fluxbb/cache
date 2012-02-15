@@ -40,13 +40,17 @@ class WinCache extends \fluxbb\cache\Cache
 	public function __construct($config)
 	{
 		if (!extension_loaded('wincache'))
+		{
 			throw new \fluxbb\cache\Exception('The WinCache cache requires the WinCache extension.');
+		}
 	}
 
 	protected function _set($key, $data, $ttl)
 	{
 		if (wincache_ucache_set($key, $data, $ttl) === false)
+		{
 			throw new \fluxbb\cache\Exception('Unable to write wincache cache: '.$key);
+		}
 	}
 
 	protected function _get($key)
@@ -55,7 +59,9 @@ class WinCache extends \fluxbb\cache\Cache
 
 		$data = wincache_ucache_get($key, $success);
 		if ($success === false)
+		{
 			return self::NOT_FOUND;
+		}
 
 		return $data;
 	}

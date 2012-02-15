@@ -42,7 +42,9 @@ class LZF implements \fluxbb\cache\Filter
 	public function __construct($config)
 	{
 		if (!extension_loaded('lzf'))
+		{
 			throw new \fluxbb\cache\Exception('The ZLF filter requires the ZLF extension.');
+		}
 	}
 
 	public function encode($data)

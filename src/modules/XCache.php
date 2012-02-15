@@ -40,20 +40,26 @@ class XCache extends \fluxbb\cache\Cache
 	public function __construct($config)
 	{
 		if (!extension_loaded('xcache'))
+		{
 			throw new \fluxbb\cache\Exception('The XCache cache requires the XCache extension.');
+		}
 	}
 
 	protected function _set($key, $data, $ttl)
 	{
 		if (xcache_set($key, $data, $ttl) === false)
+		{
 			throw new \fluxbb\cache\Exception('Unable to write xcache cache: '.$key);
+		}
 	}
 
 	protected function _get($key)
 	{
 		$data = xcache_get($key);
 		if ($data === null)
+		{
 			return self::NOT_FOUND;
+		}
 
 		return $data;
 	}

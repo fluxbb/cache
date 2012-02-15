@@ -52,10 +52,14 @@ class MCrypt implements \fluxbb\cache\Filter
 	public function __construct($config)
 	{
 		if (!extension_loaded('mcrypt'))
+		{
 			throw new \fluxbb\cache\Exception('The MCrypt filter requires the MCrypt extension.');
+		}
 
 		if (!isset($config['secret']))
+		{
 			throw new \fluxbb\cache\Exception('A secret is required to encrypt data.');
+		}
 
 		$this->key = md5($config['secret']);
 		$this->cipher = isset($config['cipher']) ? $config['cipher'] : self::DEFAULT_CIPHER;

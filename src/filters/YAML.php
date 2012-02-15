@@ -42,7 +42,9 @@ class YAML implements \fluxbb\cache\Serializer
 	public function __construct($config)
 	{
 		if (!extension_loaded('yaml'))
+		{
 			throw new \fluxbb\cache\Exception('The YAML filter requires the YAML extension.');
+		}
 	}
 
 	public function encode($data)

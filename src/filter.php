@@ -53,7 +53,9 @@ class FilterUser
 		if (!class_exists('\\fluxbb\\cache\\filters\\'.$type))
 		{
 			if (!file_exists(PHPCACHE_ROOT.'filters/'.$type.'.php'))
+			{
 				throw new Exception('Filter "'.$type.'" does not exist.');
+			}
 
 			require PHPCACHE_ROOT.'filters/'.$type.'.php';
 		}
@@ -71,7 +73,9 @@ class FilterUser
 	public function encode($data)
 	{
 		for ($i = 0; $i < $this->numFilters; $i++)
+		{
 			$data = $this->filters[$i]->encode($data);
+		}
 
 		return $data;
 	}
@@ -79,7 +83,9 @@ class FilterUser
 	public function decode($data)
 	{
 		for ($i = $this->numFilters - 1; $i >= 0; $i--)
+		{
 			$data = $this->filters[$i]->decode($data);
+		}
 
 		return $data;
 	}
