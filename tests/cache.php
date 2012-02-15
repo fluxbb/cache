@@ -44,6 +44,15 @@ abstract class CacheTest extends \PHPUnit_Framework_TestCase
 		$result = self::$cache->get($key);
 		$this->assertEquals($result, $value);
 	}
+	
+	public function testGetFalse()
+	{
+		self::$cache->set('testfalse', false);
+		
+		$result = self::$cache->get('testfalse');
+		$this->assertNotEquals(\fluxbb\cache\Cache::NOT_FOUND, $result);
+		$this->assertEquals(false, $result);
+	}
 
 	public function testDelete()
 	{

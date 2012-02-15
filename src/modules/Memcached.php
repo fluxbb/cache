@@ -81,7 +81,7 @@ class Memcached extends \fluxbb\cache\Cache
 	protected function _get($key)
 	{
 		$data = $this->memcached->get($key);
-		if ($data === false)
+		if ($this->memcached->getResultCode() != 0)
 			return self::NOT_FOUND;
 
 		return $data;
