@@ -12,6 +12,9 @@ before_script:
 
 script: phpunit tests/
 
+after_script:
+  - "cat /var/log/memcached.log"
+
 notifications:
   irc:
     - "irc.freenode.org#fluxbb"
