@@ -32,24 +32,44 @@ require PHPCACHE_ROOT.'cache.php';
 
 abstract class CacheTest extends \PHPUnit_Framework_TestCase
 {
-	protected static $cache;
+	/**
+	 * @var fluxbb\cache\Cache
+	 */
+	protected $cache;
+	
+	public function setUp()
+	{
+		$this->cache = $this->createAdapter();
+	}
+	
+	/**
+	 * @return \fluxbb\cache\Cache
+	 */
+	abstract protected function createAdapter();
+	
+	public function tearDown()
+	{
+		$this->cache->clear();
+		$this->cache = null;
+	}
+	
 
 	/**
 	 * @dataProvider provider
 	 */
 	public function testGetSet($key, $value)
 	{
-		self::$cache->set($key, $value);
+		$this->cache->set($key, $value);
 
-		$result = self::$cache->get($key);
+		$result = $this->cache->get($key);
 		$this->assertEquals($result, $value);
 	}
 	
 	public function testGetFalse()
 	{
-		self::$cache->set('testfalse', false);
+		$this->cache->set('testfalse', false);
 		
-		$result = self::$cache->get('testfalse');
+		$result = $this->cache->get('testfalse');
 		$this->assertNotEquals(\fluxbb\cache\Cache::NOT_FOUND, $result);
 		$this->assertEquals(false, $result);
 	}
@@ -58,10 +78,10 @@ abstract class CacheTest extends \PHPUnit_Framework_TestCase
 	{
 		$key = 'test';
 
-		self::$cache->set($key, time());
-		self::$cache->delete($key);
+		$this->cache->set($key, time());
+		$this->cache->delete($key);
 
-		$result = self::$cache->get($key);
+		$result = $this->cache->get($key);
 		$this->assertEquals($result, \fluxbb\cache\Cache::NOT_FOUND);
 	}
 

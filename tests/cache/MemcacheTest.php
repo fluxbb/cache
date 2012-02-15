@@ -31,14 +31,15 @@ require_once dirname(__FILE__).'/../cache.php';
 
 class MemcacheTest extends CacheTest
 {
-	public static function setUpBeforeClass()
+	protected function createAdapter()
 	{
-		self::$cache = \fluxbb\cache\Cache::load('Memcache', array());
-	}
-
-	public static function tearDownAfterClass()
-	{
-		self::$cache->clear();
-		self::$cache = null;
+		if (!extension_loaded('memcache'))
+		{
+			$this->markTestSkipped(
+				'The Memcache extension was not loaded.'
+			);
+		}
+		
+		return \fluxbb\cache\Cache::load('Memcache', array());
 	}
 }

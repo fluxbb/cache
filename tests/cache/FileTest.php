@@ -31,14 +31,8 @@ require_once dirname(__FILE__).'/../cache.php';
 
 class FileTest extends CacheTest
 {
-	public static function setUpBeforeClass()
+	protected function createAdapter()
 	{
-		self::$cache = \fluxbb\cache\Cache::load('File', array('dir' => '/tmp/fluxbb-cache'));
-	}
-
-	public static function tearDownAfterClass()
-	{
-		self::$cache->clear();
-		self::$cache = null;
+		return \fluxbb\cache\Cache::load('File', array('dir' => '/tmp/fluxbb-cache'));
 	}
 }

@@ -31,14 +31,15 @@ require_once dirname(__FILE__).'/../cache.php';
 
 class APCTest extends CacheTest
 {
-	public static function setUpBeforeClass()
+	protected function createAdapter()
 	{
-		self::$cache = \fluxbb\cache\Cache::load('APC', array());
-	}
-
-	public static function tearDownAfterClass()
-	{
-		self::$cache->clear();
-		self::$cache = null;
+		if (!extension_loaded('apc'))
+		{
+			$this->markTestSkipped(
+				'The APC extension was not loaded.'
+			);
+		}
+		
+		return \fluxbb\cache\Cache::load('APC', array());
 	}
 }
