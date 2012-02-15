@@ -27,9 +27,9 @@
 
 namespace fluxbb\cache\tests;
 
-require_once dirname(__FILE__).'/../cache.php';
+require_once dirname(__FILE__).'/../CacheTestCase.php';
 
-class FileTest extends CacheTest
+class FileTest extends CacheTestCase
 {
 	protected function createAdapter()
 	{

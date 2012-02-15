@@ -27,9 +27,9 @@
 
 namespace fluxbb\cache\tests;
 
-require_once dirname(__FILE__).'/../cache.php';
+require_once dirname(__FILE__).'/../CacheTestCase.php';
 
-class MemcachedTest extends CacheTest
+class MemcachedTest extends CacheTestCase
 {
 	protected function createAdapter()
 	{

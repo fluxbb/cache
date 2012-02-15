@@ -27,9 +27,9 @@
 
 namespace fluxbb\cache\tests;
 
-require_once dirname(__FILE__).'/../cache.php';
+require_once dirname(__FILE__).'/../CacheTestCase.php';
 
-class RedisTest extends CacheTest
+class RedisTest extends CacheTestCase
 {
 	protected function createAdapter()
 	{

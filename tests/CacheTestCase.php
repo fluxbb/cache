@@ -30,7 +30,7 @@ namespace fluxbb\cache\tests;
 define('PHPCACHE_ROOT', realpath(dirname(__FILE__).'/../').'/src/');
 require PHPCACHE_ROOT.'cache.php';
 
-abstract class CacheTest extends \PHPUnit_Framework_TestCase
+abstract class CacheTestCase extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * @var fluxbb\cache\Cache
