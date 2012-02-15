@@ -2,7 +2,8 @@
 fluxbb-cache is an API abstraction around various different cache stores available for PHP. Filters are supported to allow encoding of data during storage.
 For cache stores that do not support data expiration (i.e. use of TTL) it is emulated.
 
-License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/lgpl.html)
+## Documentation
+[On our website](http://fluxbb.org/docs/v2.0/modules/cache)
 
 ## Supported cache stores
  * Flat files
@@ -15,60 +16,8 @@ License: [LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/
  * [Memcached](http://uk2.php.net/manual/en/book.memcached.php)
  * [Redis](https://github.com/nicolasff/phpredis)
 
-## Available serializers
- * [PHP-serialize](http://uk2.php.net/manual/en/function.serialize.php)
- * [JSON](http://uk2.php.net/manual/en/book.json.php) * does not correctly serialize associative arrays or objects with protected/private attributes
- * [YAML](http://uk2.php.net/manual/en/book.yaml.php)
- * [XML](http://pear.php.net/package/XML_Serializer/)
+## Serializers & Filters
+fluxbb-cache also allows for adding serializers and filters to data, to further serialize, compress or encrypt data.
 
-## Available filters
-### Compression
- * [BZip2](http://uk2.php.net/manual/en/book.bzip2.php)
- * [GZip](http://uk2.php.net/manual/en/book.zlib.php)
- * [LZF](http://uk2.php.net/manual/en/book.lzf.php)
-
-### Encryption
- * [MCrypt](http://uk2.php.net/manual/en/book.mcrypt.php)
-
-## API
-	\fluxbb\cache\Cache::load($type, $args = array(), $serializer_type = false, $serializer_args = array());
-
-	$cache->set($key, $data, $ttl = 0);
-	$cache->get($key);
-	$cache->delete($key);
-	$cache->clear();
-
-	$cache->inserts;
-	$cache->hits;
-	$cache->misses;
-
-## Example usage
-	// We want a file-based cache in the /tmp/php-cache/ dir - this will be created if possible. Obviously this path wont work on Windows!
-	$cache = \fluxbb\cache\Cache::load('File', array('dir' => '/tmp/php-cache/'));
-
-	// If we have the mcrypt extension lets encrypt the cache
-	if (extension_loaded('mcrypt'))
-	{
-		echo 'Adding mcrypt filter.'."\n";
-		$cache->addFilter('MCrypt', array('secret' => 'i like ponies'));
-	}
-
-	// Check if there is already a value cached
-	$value = $cache->get('test');
-	echo ($value === \fluxbb\cache\Cache::NOT_FOUND ? 'Value not found in cache.' : 'Value: '.$value)."\n";
-
-	// Store a new unique ID in the cache
-	$uniqid = uniqid();
-
-	echo 'Storing: '.$uniqid."\n";
-	$cache->set('test', $uniqid);
-
-	// Check that the new value was stored correctly
-	$value = $cache->get('test');
-	echo ($value === \fluxbb\cache\Cache::NOT_FOUND ? 'Value not found in cache.' : 'Value: '.$value)."\n";
-
-## Example output
-	Adding mcrypt filter.
-	Value not found in cache.
-	Storing: 4d35ca30ab630
-	Value: 4d35ca30ab630
+## License
+[LGPL - GNU Lesser General Public License](http://www.gnu.org/licenses/lgpl.html)
