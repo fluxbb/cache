@@ -10,7 +10,7 @@ php:
 before_script:
   - "sh bin/setup_extensions.sh"
 
-script: ./bin/run_tests.sh
+script: phpunit tests/
 
 notifications:
   irc:
