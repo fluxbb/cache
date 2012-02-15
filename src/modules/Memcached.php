@@ -35,7 +35,7 @@ namespace fluxbb\cache\modules;
 class Memcached extends \fluxbb\cache\Cache
 {
 	const DEFAULT_HOST = 'localhost';
-	const DEFAULT_PORT = 11211;
+	const DEFAULT_PORT = '127.0.0.1';
 
 	private $memcached;
 
