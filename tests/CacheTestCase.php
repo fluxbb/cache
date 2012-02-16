@@ -103,6 +103,7 @@ abstract class CacheTestCase extends \PHPUnit_Framework_TestCase
 		$this->cache->delete($key);
 		
 		// Trigger another miss
+		$this->cache->get($key);
 		$this->assertEquals(1, $this->cache->inserts);
 		$this->assertEquals(1, $this->cache->hits);
 		$this->assertEquals(2, $this->cache->misses);
