@@ -33,13 +33,15 @@ require PHPCACHE_ROOT.'cache.php';
 abstract class CacheTestCase extends \PHPUnit_Framework_TestCase
 {
 	/**
+	 * The cache adapter used for testing.
+	 * 
+	 * This should better be set by concrete tests.
+	 * 
 	 * @var fluxbb\cache\Cache
 	 */
 	protected $cache;
 	
-	abstract public function setUp();
 	
-
 	/**
 	 * @dataProvider provider
 	 */
