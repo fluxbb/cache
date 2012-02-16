@@ -72,6 +72,41 @@ abstract class CacheTestCase extends \PHPUnit_Framework_TestCase
 		$result = $this->cache->get($key);
 		$this->assertEquals($result, \fluxbb\cache\Cache::NOT_FOUND);
 	}
+	
+	public function testStatistics()
+	{
+		$key = 'test';
+		
+		$this->assertEquals(0, $this->cache->inserts);
+		$this->assertEquals(0, $this->cache->hits);
+		$this->assertEquals(0, $this->cache->misses);
+		
+		// Trigger a miss
+		$this->cache->get($key);
+		$this->assertEquals(0, $this->cache->inserts);
+		$this->assertEquals(0, $this->cache->hits);
+		$this->assertEquals(1, $this->cache->misses);
+		
+		// Store data
+		$this->cache->set($key, time());
+		$this->assertEquals(1, $this->cache->inserts);
+		$this->assertEquals(0, $this->cache->hits);
+		$this->assertEquals(1, $this->cache->misses);
+		
+		// Trigger a hit
+		$this->cache->get($key);
+		$this->assertEquals(1, $this->cache->inserts);
+		$this->assertEquals(1, $this->cache->hits);
+		$this->assertEquals(1, $this->cache->misses);
+		
+		// Delete key
+		$this->cache->delete($key);
+		
+		// Trigger another miss
+		$this->assertEquals(1, $this->cache->inserts);
+		$this->assertEquals(1, $this->cache->hits);
+		$this->assertEquals(2, $this->cache->misses);
+	}
 
 	public function provider()
 	{
