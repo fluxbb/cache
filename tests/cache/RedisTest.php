@@ -31,7 +31,7 @@ require_once dirname(__FILE__).'/../CacheTestCase.php';
 
 class RedisTest extends CacheTestCase
 {
-	protected function createAdapter()
+	public function setUp()
 	{
 		if (!extension_loaded('redis'))
 		{
@@ -40,6 +40,15 @@ class RedisTest extends CacheTestCase
 			);
 		}
 		
-		return \fluxbb\cache\Cache::load('Redis', array());
+		$this->cache = \fluxbb\cache\Cache::load('Redis', array());
+	}
+	
+	public function tearDown()
+	{
+		if (isset($this->cache))
+		{
+			$this->cache->clear();
+			$this->cache = null;
+		}
 	}
 }

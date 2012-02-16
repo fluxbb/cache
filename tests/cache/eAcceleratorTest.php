@@ -31,7 +31,7 @@ require_once dirname(__FILE__).'/../CacheTestCase.php';
 
 class eAcceleratorTest extends CacheTestCase
 {
-	protected function createAdapter()
+	public function setUp()
 	{
 		if (!extension_loaded('eaccelerator') || !function_exists('eaccelerator_put'))
 		{
@@ -40,6 +40,15 @@ class eAcceleratorTest extends CacheTestCase
 			);
 		}
 		
-		return \fluxbb\cache\Cache::load('eAccelerator', array());
+		$this->cache = \fluxbb\cache\Cache::load('eAccelerator', array());
+	}
+	
+	public function tearDown()
+	{
+		if (isset($this->cache))
+		{
+			$this->cache->clear();
+			$this->cache = null;
+		}
 	}
 }

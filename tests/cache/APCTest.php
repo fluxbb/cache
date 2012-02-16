@@ -31,7 +31,7 @@ require_once dirname(__FILE__).'/../CacheTestCase.php';
 
 class APCTest extends CacheTestCase
 {
-	protected function createAdapter()
+	public function setUp()
 	{
 		if (!extension_loaded('apc'))
 		{
@@ -40,6 +40,15 @@ class APCTest extends CacheTestCase
 			);
 		}
 		
-		return \fluxbb\cache\Cache::load('APC', array());
+		$this->cache = \fluxbb\cache\Cache::load('APC', array());
+	}
+	
+	public function tearDown()
+	{
+		if (isset($this->cache))
+		{
+			$this->cache->clear();
+			$this->cache = null;
+		}
 	}
 }

@@ -31,7 +31,7 @@ require_once dirname(__FILE__).'/../CacheTestCase.php';
 
 class WinCacheTest extends CacheTestCase
 {
-	protected function createAdapter()
+	public function setUp()
 	{
 		if (!extension_loaded('wincache'))
 		{
@@ -40,6 +40,15 @@ class WinCacheTest extends CacheTestCase
 			);
 		}
 		
-		return \fluxbb\cache\Cache::load('WinCache', array());
+		$this->cache = \fluxbb\cache\Cache::load('WinCache', array());
+	}
+	
+	public function tearDown()
+	{
+		if (isset($this->cache))
+		{
+			$this->cache->clear();
+			$this->cache = null;
+		}
 	}
 }

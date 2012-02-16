@@ -31,8 +31,17 @@ require_once dirname(__FILE__).'/../CacheTestCase.php';
 
 class FileTest extends CacheTestCase
 {
-	protected function createAdapter()
+	public function setUp()
 	{
-		return \fluxbb\cache\Cache::load('File', array('dir' => '/tmp/fluxbb-cache'));
+		$this->cache = \fluxbb\cache\Cache::load('File', array('dir' => '/tmp/fluxbb-cache'));
+	}
+	
+	public function tearDown()
+	{
+		if (isset($this->cache))
+		{
+			$this->cache->clear();
+			$this->cache = null;
+		}
 	}
 }

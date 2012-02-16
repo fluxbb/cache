@@ -31,7 +31,7 @@ require_once dirname(__FILE__).'/../CacheTestCase.php';
 
 class MemcachedTest extends CacheTestCase
 {
-	protected function createAdapter()
+	public function setUp()
 	{
 		if (!extension_loaded('memcached'))
 		{
@@ -40,6 +40,15 @@ class MemcachedTest extends CacheTestCase
 			);
 		}
 		
-		return \fluxbb\cache\Cache::load('Memcached', array());
+		$this->cache = \fluxbb\cache\Cache::load('Memcached', array());
+	}
+	
+	public function tearDown()
+	{
+		if (isset($this->cache))
+		{
+			$this->cache->clear();
+			$this->cache = null;
+		}
 	}
 }

@@ -31,7 +31,7 @@ require_once dirname(__FILE__).'/../CacheTestCase.php';
 
 class ZendDiskTest extends CacheTestCase
 {
-	protected function createAdapter()
+	public function setUp()
 	{
 		if (!extension_loaded('zendcache'))
 		{
@@ -40,6 +40,15 @@ class ZendDiskTest extends CacheTestCase
 			);
 		}
 		
-		return \fluxbb\cache\Cache::load('ZendCache', array());
+		$this->cache = \fluxbb\cache\Cache::load('ZendCache', array());
+	}
+	
+	public function tearDown()
+	{
+		if (isset($this->cache))
+		{
+			$this->cache->clear();
+			$this->cache = null;
+		}
 	}
 }

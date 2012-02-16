@@ -31,7 +31,7 @@ require_once dirname(__FILE__).'/../CacheTestCase.php';
 
 class ZendSHMTest extends CacheTestCase
 {
-	protected function createAdapter()
+	public function setUp()
 	{
 		if (!extension_loaded('zendcache'))
 		{
@@ -40,6 +40,15 @@ class ZendSHMTest extends CacheTestCase
 			);
 		}
 		
-		return \fluxbb\cache\Cache::load('ZendSHM', array());
+		$this->cache = \fluxbb\cache\Cache::load('ZendSHM', array());
+	}
+	
+	public function tearDown()
+	{
+		if (isset($this->cache))
+		{
+			$this->cache->clear();
+			$this->cache = null;
+		}
 	}
 }

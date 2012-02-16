@@ -37,21 +37,7 @@ abstract class CacheTestCase extends \PHPUnit_Framework_TestCase
 	 */
 	protected $cache;
 	
-	public function setUp()
-	{
-		$this->cache = $this->createAdapter();
-	}
-	
-	/**
-	 * @return \fluxbb\cache\Cache
-	 */
-	abstract protected function createAdapter();
-	
-	public function tearDown()
-	{
-		$this->cache->clear();
-		$this->cache = null;
-	}
+	abstract public function setUp();
 	
 
 	/**

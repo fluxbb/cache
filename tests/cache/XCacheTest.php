@@ -31,7 +31,7 @@ require_once dirname(__FILE__).'/../CacheTestCase.php';
 
 class XCacheTest extends CacheTestCase
 {
-	protected function createAdapter()
+	public function setUp()
 	{
 		if (!extension_loaded('xcache'))
 		{
@@ -40,6 +40,15 @@ class XCacheTest extends CacheTestCase
 			);
 		}
 		
-		return \fluxbb\cache\Cache::load('XCache', array());
+		$this->cache = \fluxbb\cache\Cache::load('XCache', array());
+	}
+	
+	public function tearDown()
+	{
+		if (isset($this->cache))
+		{
+			$this->cache->clear();
+			$this->cache = null;
+		}
 	}
 }
