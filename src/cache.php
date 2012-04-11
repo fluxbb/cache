@@ -106,7 +106,7 @@ abstract class Cache extends FilterUser
     $value = $this->get($key);
     if ($value === self::NOT_FOUND)
     {
-      $value = value($default);
+      $value = $default();
       $this->set($key, $value);
     }
     
