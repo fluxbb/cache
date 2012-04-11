@@ -34,14 +34,14 @@ abstract class CacheTestCase extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * The cache adapter used for testing.
-	 * 
+	 *
 	 * This should better be set by concrete tests.
-	 * 
+	 *
 	 * @var fluxbb\cache\Cache
 	 */
 	protected $cache;
-	
-	
+
+
 	/**
 	 * @dataProvider provider
 	 */
@@ -52,25 +52,25 @@ abstract class CacheTestCase extends \PHPUnit_Framework_TestCase
 		$result = $this->cache->get($key);
 		$this->assertEquals($result, $value);
 	}
-	
+
 	public function testGetFalse()
 	{
 		$this->cache->set('testfalse', false);
-		
+
 		$result = $this->cache->get('testfalse');
 		$this->assertNotEquals(\fluxbb\cache\Cache::NOT_FOUND, $result);
 		$this->assertEquals(false, $result);
 	}
-	
+
 	public function testRemember()
 	{
-    $key = 'test';
-    $value = 2;
-    $result = $this->cache->remember('test', function() use ($value) {
-      return $value;
-    });
-    
-    $this->assertEquals($value, $result);
+		$key = 'test';
+		$value = 2;
+		$result = $this->cache->remember($key, function() use ($value) {
+			return $value;
+		});
+
+		$this->assertEquals($value, $result);
 	}
 
 	public function testDelete()
@@ -83,36 +83,36 @@ abstract class CacheTestCase extends \PHPUnit_Framework_TestCase
 		$result = $this->cache->get($key);
 		$this->assertEquals($result, \fluxbb\cache\Cache::NOT_FOUND);
 	}
-	
+
 	public function testStatistics()
 	{
 		$key = 'test';
-		
+
 		$this->assertEquals(0, $this->cache->inserts);
 		$this->assertEquals(0, $this->cache->hits);
 		$this->assertEquals(0, $this->cache->misses);
-		
+
 		// Trigger a miss
 		$this->cache->get($key);
 		$this->assertEquals(0, $this->cache->inserts);
 		$this->assertEquals(0, $this->cache->hits);
 		$this->assertEquals(1, $this->cache->misses);
-		
+
 		// Store data
 		$this->cache->set($key, time());
 		$this->assertEquals(1, $this->cache->inserts);
 		$this->assertEquals(0, $this->cache->hits);
 		$this->assertEquals(1, $this->cache->misses);
-		
+
 		// Trigger a hit
 		$this->cache->get($key);
 		$this->assertEquals(1, $this->cache->inserts);
 		$this->assertEquals(1, $this->cache->hits);
 		$this->assertEquals(1, $this->cache->misses);
-		
+
 		// Delete key
 		$this->cache->delete($key);
-		
+
 		// Trigger another miss
 		$this->cache->get($key);
 		$this->assertEquals(1, $this->cache->inserts);

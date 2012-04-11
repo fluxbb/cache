@@ -100,17 +100,17 @@ abstract class Cache extends FilterUser
 	}
 
 	protected abstract function _get($key);
-	
+
 	public function remember($key, $default)
 	{
-    $value = $this->get($key);
-    if ($value === self::NOT_FOUND)
-    {
-      $value = $default();
-      $this->set($key, $value);
-    }
-    
-    return $value;
+		$value = $this->get($key);
+		if ($value === self::NOT_FOUND)
+		{
+			$value = $default();
+			$this->set($key, $value);
+		}
+
+		return $value;
 	}
 
 	public function delete($key)
@@ -123,8 +123,8 @@ abstract class Cache extends FilterUser
 	public abstract function clear();
 }
 
-class Exception extends \Exception {
-	
+class Exception extends \Exception
+{
 	public function __construct($msg)
 	{
 		parent::__construct($msg);
