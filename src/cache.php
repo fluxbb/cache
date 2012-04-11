@@ -100,6 +100,18 @@ abstract class Cache extends FilterUser
 	}
 
 	protected abstract function _get($key);
+	
+	public function remember($key, $default)
+	{
+    $value = $this->get($key);
+    if ($value === self::NOT_FOUND)
+    {
+      $value = value($default);
+      $this->set($key, $value);
+    }
+    
+    return $value;
+	}
 
 	public function delete($key)
 	{
