@@ -27,8 +27,10 @@
 
 namespace fluxbb\cache\tests;
 
-define('PHPCACHE_ROOT', realpath(dirname(__FILE__).'/../').'/src/');
-require PHPCACHE_ROOT.'filter.php';
+if (!defined('PHPCACHE_ROOT'))
+	define('PHPCACHE_ROOT', realpath(dirname(__FILE__).'/../').'/src/');
+
+require_once PHPCACHE_ROOT.'filter.php';
 
 abstract class SerializerTestCase extends \PHPUnit_Framework_TestCase
 {
