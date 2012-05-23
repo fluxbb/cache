@@ -27,5 +27,5 @@ sh -c "cd nicolasff-phpredis-43bc590 && phpize && ./configure && make && sudo ma
 echo "extension=redis.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
 
 # Install Pear::XML_Serializer
-pyrus install pear/XML_Serializer
+pyrus install pear/XML_Serializer-0.20.2
 phpenv rehash
