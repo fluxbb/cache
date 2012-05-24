@@ -51,6 +51,6 @@ class JSON implements \fluxbb\cache\Serializer
 
 	public function decode($data)
 	{
-		return json_decode($data);
+		return json_decode($data, true);
 	}
 }
