@@ -35,3 +35,9 @@ echo "extension=yaml.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s
 # Install Pear::XML_Serializer
 pyrus install pear/XML_Serializer-0.20.2
 phpenv rehash
+
+# Install LZF
+wget http://pecl.php.net/get/LZF-1.5.2.tgz
+tar -xzf LZF-1.5.2.tgz
+sh -c "cd LZF-1.5.2 && phpize && ./configure && make && sudo make install"
+echo "extension=lzf.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
