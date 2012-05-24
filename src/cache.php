@@ -29,7 +29,7 @@ namespace fluxbb\cache;
 if (!defined('PHPCACHE_ROOT'))
 	define('PHPCACHE_ROOT', dirname(__FILE__).'/');
 
-require PHPCACHE_ROOT.'filter.php';
+require_once PHPCACHE_ROOT.'filter.php';
 
 abstract class Cache extends FilterUser
 {
