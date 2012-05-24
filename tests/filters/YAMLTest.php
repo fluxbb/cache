@@ -41,6 +41,6 @@ class YAMLTest extends SerializerTestCase
 			);
 		}
 
-		$this->serializer = new \fluxbb\cache\filters\YAML(array());
+		$this->filter = new \fluxbb\cache\filters\YAML(array());
 	}
 }

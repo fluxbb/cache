@@ -34,6 +34,6 @@ class VarExportTest extends SerializerTestCase
 {
 	public function setUp()
 	{
-		$this->serializer = new \fluxbb\cache\filters\VarExport(array());
+		$this->filter = new \fluxbb\cache\filters\VarExport(array());
 	}
 }

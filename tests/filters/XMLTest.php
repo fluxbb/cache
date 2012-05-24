@@ -41,6 +41,6 @@ class XMLTest extends SerializerTestCase
 			);
 		}
 
-		$this->serializer = new \fluxbb\cache\filters\XML(array());
+		$this->filter = new \fluxbb\cache\filters\XML(array());
 	}
 }

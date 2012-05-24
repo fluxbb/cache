@@ -30,16 +30,40 @@ namespace fluxbb\cache\tests;
 if (!defined('PHPCACHE_ROOT'))
 	define('PHPCACHE_ROOT', realpath(dirname(__FILE__).'/../').'/src/');
 
-require_once dirname(__FILE__).'/FilterTestCase.php';
+require_once PHPCACHE_ROOT.'filter.php';
 
-abstract class SerializerTestCase extends FilterTestCase
+abstract class FilterTestCase extends \PHPUnit_Framework_TestCase
 {
+	/**
+	 * The filter used for testing.
+	 *
+	 * This should better be set by concrete tests.
+	 *
+	 * @var fluxbb\cache\Filter
+	 */
+	protected $filter;
+
+
 	/**
 	 * @dataProvider provider
 	 */
-	public function testEncodingYieldsString($value)
+	public function testDecodedEqualsOriginalString($value)
 	{
 		$encoded = $this->filter->encode($value);
-		$this->assertInternalType('string', $encoded);
+		$decoded = $this->filter->decode($encoded);
+
+		$this->assertEquals($value, $decoded);
+	}
+
+	public function provider()
+	{
+		return array(
+			array(1234),
+			array('hello world'),
+			array(true),
+			array(null),
+			array(array(0 => 'zero', 1 => 'one', 7 => 'seven')),
+			//array(new \DOMComment('hello world')), // TODO: Is there any way to handle objects, too?
+		);
 	}
 }

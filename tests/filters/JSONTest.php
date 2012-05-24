@@ -34,6 +34,6 @@ class JSONTest extends SerializerTestCase
 {
 	public function setUp()
 	{
-		$this->serializer = new \fluxbb\cache\filters\JSON(array());
+		$this->filter = new \fluxbb\cache\filters\JSON(array());
 	}
 }

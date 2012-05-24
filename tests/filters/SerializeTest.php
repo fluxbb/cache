@@ -34,6 +34,6 @@ class SerializeTest extends SerializerTestCase
 {
 	public function setUp()
 	{
-		$this->serializer = new \fluxbb\cache\filters\Serialize(array());
+		$this->filter = new \fluxbb\cache\filters\Serialize(array());
 	}
 }
