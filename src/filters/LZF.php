@@ -27,7 +27,7 @@
 
 /**
  * The LZF filter compresses data using LZF.
- * http://uk2.php.net/manual/en/book.lzf.php
+ * http://php.net/manual/en/book.lzf.php
  */
 
 namespace fluxbb\cache\filters;
@@ -43,7 +43,7 @@ class LZF implements \fluxbb\cache\Filter
 	{
 		if (!extension_loaded('lzf'))
 		{
-			throw new \fluxbb\cache\Exception('The ZLF filter requires the ZLF extension.');
+			throw new \fluxbb\cache\Exception('The LZF filter requires the LZF extension.');
 		}
 	}
 
