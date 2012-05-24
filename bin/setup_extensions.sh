@@ -26,6 +26,12 @@ tar -xzf phpredis.tgz
 sh -c "cd nicolasff-phpredis-43bc590 && phpize && ./configure && make && sudo make install"
 echo "extension=redis.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
 
+# Install YAML
+wget http://pecl.php.net/get/yaml-1.1.0.tgz
+tar -xzf yaml-1.1.0.tgz
+sh -c "cd yaml-1.1.0 && phpize && ./configure && make && sudo make install"
+echo "extension=yaml.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+
 # Install Pear::XML_Serializer
 pyrus install pear/XML_Serializer-0.20.2
 phpenv rehash
