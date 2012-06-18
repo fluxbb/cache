@@ -70,6 +70,7 @@ class MCrypt implements \fluxbb\cache\Filter
 
 	public function encode($data)
 	{
+		$data = serialize($data);
 		$data = mcrypt_encrypt($this->cipher, $this->key, $data, $this->mode, $this->iv);
 		return base64_encode($data);
 	}
@@ -77,6 +78,7 @@ class MCrypt implements \fluxbb\cache\Filter
 	public function decode($data)
 	{
 		$data = base64_decode($data);
-		return mcrypt_decrypt($this->cipher, $this->key, $data, $this->mode, $this->iv);
+		$data = mcrypt_decrypt($this->cipher, $this->key, $data, $this->mode, $this->iv);
+		return unserialize($data);
 	}
 }
