@@ -56,11 +56,11 @@ class BZip2 implements \fluxbb\cache\Filter
 
 	public function encode($data)
 	{
-		return bzcompress($data, $this->level);
+		return bzcompress(serialize($data), $this->level);
 	}
 
 	public function decode($data)
 	{
-		return bzdecompress($data);
+		return unserialize(bzdecompress($data));
 	}
 }

@@ -55,11 +55,11 @@ class GZip implements \fluxbb\cache\Filter
 
 	public function encode($data)
 	{
-		return gzdeflate($data, $this->level);
+		return gzdeflate(serialize($data), $this->level);
 	}
 
 	public function decode($data)
 	{
-		return gzinflate($data);
+		return unserialize(gzinflate($data));
 	}
 }
