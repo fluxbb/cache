@@ -46,7 +46,7 @@ class File extends \fluxbb\cache\Cache
 	*/
 	public function __construct($config)
 	{
-		$this->dir = $config['dir'];
+		$this->dir = rtrim($config['dir'], '/').'/';
 		if ((!is_dir($this->dir) && !@mkdir($this->dir, 0777, true)) || !is_writable($this->dir))
 		{
 			throw new \fluxbb\cache\Exception('Unable to write to cache dir: '.$this->dir);
