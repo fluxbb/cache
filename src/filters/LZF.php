@@ -49,11 +49,11 @@ class LZF implements \fluxbb\cache\Filter
 
 	public function encode($data)
 	{
-		return lzf_compress($data);
+		return lzf_compress(serialize($data));
 	}
 
 	public function decode($data)
 	{
-		return lzf_decompress($data);
+		return unserialize(lzf_decompress($data));
 	}
 }
