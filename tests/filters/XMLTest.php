@@ -34,7 +34,7 @@ class XMLTest extends SerializerTestCase
 {
 	public function setUp()
 	{
-		if (!class_exists('XML_Serializer') || !class_exists('XML_Unserializer'))
+		if (!class_exists('XML_Serializer', false) || !class_exists('XML_Unserializer', false))
 		{
 			$this->markTestSkipped(
 				'The Pear::XML_Serializer library was not loaded.'
