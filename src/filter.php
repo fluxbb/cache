@@ -50,7 +50,7 @@ class FilterUser
 
 	public final function addFilter($type, $args = array())
 	{
-		if (!class_exists('\\fluxbb\\cache\\filters\\'.$type))
+		if (!class_exists('\\fluxbb\\cache\\filters\\'.$type, false))
 		{
 			if (!file_exists(PHPCACHE_ROOT.'filters/'.$type.'.php'))
 			{

@@ -38,7 +38,7 @@ abstract class Cache extends FilterUser
 
 	public static final function load($type, $args = array(), $serializerType = false, $serializerArgs = array())
 	{
-		if (!class_exists('\\fluxbb\\cache\\modules\\'.$type))
+		if (!class_exists('\\fluxbb\\cache\\modules\\'.$type, false))
 		{
 			if (!file_exists(PHPCACHE_ROOT.'modules/'.$type.'.php'))
 			{
