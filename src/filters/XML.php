@@ -47,17 +47,17 @@ class XML implements \fluxbb\cache\Serializer
 		@include_once 'XML/Serializer.php';
 		@include_once 'XML/Unserializer.php';
 
-		if (!class_exists('XML_Serializer') || !class_exists('XML_Unserializer'))
+		if (!class_exists('\\XML_Serializer') || !class_exists('\\XML_Unserializer'))
 		{
 			throw new \fluxbb\cache\Exception('The XML filter requires the Pear::XML_Serializer library.');
 		}
 
-		$this->serializer = new XML_Serializer(array(
+		$this->serializer = new \XML_Serializer(array(
 			XML_SERIALIZER_OPTION_TYPEHINTS		=> true,
 			XML_SERIALIZER_OPTION_RETURN_RESULT 	=> true,
 		));
 
-		$this->unserializer = new XML_Unserializer(array(
+		$this->unserializer = new \XML_Unserializer(array(
 			XML_UNSERIALIZER_OPTION_RETURN_RESULT	=> true,
 		));
 	}
