@@ -34,6 +34,9 @@ class XMLTest extends SerializerTestCase
 {
 	public function setUp()
 	{
+		@include_once 'XML/Serializer.php';
+		@include_once 'XML/Unserializer.php';
+
 		if (!class_exists('XML_Serializer', false) || !class_exists('XML_Unserializer', false))
 		{
 			$this->markTestSkipped(
