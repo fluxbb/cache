@@ -14,10 +14,10 @@ echo "apc.enable_cli = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.i
 # Install Redis bindings
 #echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
-# Install YAML
-pecl install yaml
+# Install YAML with default options
+echo "\n" | pecl install yaml
 
-# Install LZF
-pecl install lzf
+# Install LZF with default options
+echo "\n" | pecl install lzf
 
 phpenv rehash
