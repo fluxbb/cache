@@ -1,4 +1,4 @@
-# fluxbb-cache ![Build status](https://secure.travis-ci.org/fluxbb/cache.png?branch=master)
+# fluxbb-cache [![Build status](https://secure.travis-ci.org/fluxbb/cache.png?branch=master)](https://travis-ci.org/fluxbb/cache)
 fluxbb-cache is an API abstraction around various different cache stores available for PHP. Filters are supported to allow encoding of data during storage.
 For cache stores that do not support data expiration (i.e. use of TTL) it is emulated.
 
